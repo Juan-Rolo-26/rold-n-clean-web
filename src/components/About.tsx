@@ -1,4 +1,5 @@
 import { Target, Heart, Users, Award } from 'lucide-react';
+import volquetes3 from '@/assets/volquetes3.jpeg';
 
 const values = [
   {
@@ -25,21 +26,21 @@ const values = [
 
 const About = () => {
   return (
-    <section id="nosotros" className="section-padding bg-background">
+    <section id="nosotros" data-reveal="fade-up" className="section-padding bg-background">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Side */}
-          <div className="relative">
+          <div data-reveal="fade-right" className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200"
-                alt="Equipo Volquetes Roldán Limpia"
+                src={volquetes3}
+                alt="Volquetes Roldán"
                 className="w-full h-full object-cover"
               />
             </div>
             {/* Floating card */}
             <div className="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-xl shadow-lg hidden md:block">
-              <div className="text-4xl font-bold">+10</div>
+              <div className="text-4xl font-bold">5</div>
               <div className="text-sm text-white/80">Años de experiencia</div>
             </div>
             {/* Decorative element */}
@@ -47,7 +48,7 @@ const About = () => {
           </div>
 
           {/* Content Side */}
-          <div>
+          <div data-reveal="fade-left">
             <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
               Sobre Nosotros
             </span>
@@ -59,7 +60,7 @@ const About = () => {
             <div className="space-y-4 text-muted-foreground mb-8">
               <p>
                 <strong className="text-foreground">Volquetes Roldán Limpia</strong> nació hace más de 
-                10 años con el objetivo de brindar soluciones integrales en alquiler de volquetes 
+                5 años con el objetivo de brindar soluciones integrales en alquiler de volquetes 
                 y gestión de residuos para la zona de Roldán y alrededores.
               </p>
               <p>
@@ -79,6 +80,8 @@ const About = () => {
               {values.map((value, index) => (
                 <div 
                   key={index} 
+                  data-reveal="fade-up"
+                  data-reveal-delay={index * 80}
                   className="flex items-start gap-3 p-4 rounded-lg bg-accent/50 hover:bg-accent transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">

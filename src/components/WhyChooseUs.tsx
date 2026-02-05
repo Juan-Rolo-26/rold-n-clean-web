@@ -9,7 +9,7 @@ const benefits = [
   {
     icon: BadgeCheck,
     title: 'Experiencia Comprobada',
-    description: 'Más de 10 años en el rubro nos respaldan. Conocemos cada detalle del servicio.',
+    description: 'Más de 5 años en el rubro nos respaldan. Conocemos cada detalle del servicio.',
   },
   {
     icon: Wallet,
@@ -35,60 +35,37 @@ const benefits = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="section-padding bg-background">
+    <section data-reveal="fade-up" className="py-20 bg-white relative overflow-hidden">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
-            ¿Por qué elegirnos?
-          </span>
-          <h2 className="heading-secondary text-foreground mb-6">
-            La mejor opción para{' '}
-            <span className="text-primary">tu proyecto</span>
+        <div data-reveal="fade-up" className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+          <span className="text-accent font-bold uppercase tracking-widest text-sm">¿Por qué elegirnos?</span>
+          <h2 className="heading-secondary text-slate-800">
+            Calidad y Confianza para <span className="text-accent">tu proyecto</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Nos diferenciamos por nuestro compromiso con la calidad, puntualidad 
-            y atención al cliente. Tu satisfacción es nuestra prioridad.
+          <p className="text-slate-600 leading-relaxed">
+            Nos diferenciamos por nuestro compromiso con la puntualidad y la atención al cliente.
           </p>
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
-            <div 
-              key={index} 
-              className="group flex gap-5 p-6 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+            <div
+              key={index}
+              data-reveal="fade-up"
+              data-reveal-delay={index * 90}
+              className="group flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-accent/40 hover:bg-white hover:shadow-lg transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-300">
-                <benefit.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
+              <div className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                <benefit.icon className="w-7 h-7 text-green-600 group-hover:text-accent" />
               </div>
-              <div>
-                <h4 className="font-semibold text-foreground text-lg mb-2">{benefit.title}</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">{benefit.description}</p>
+              <div className="flex-1">
+                <h4 className="font-bold text-slate-800 text-lg mb-2">{benefit.title}</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">{benefit.description}</p>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA Banner */}
-        <div className="mt-16 bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="heading-tertiary text-white mb-4">
-            ¿Listo para comenzar tu proyecto?
-          </h3>
-          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Contáctanos ahora y recibe asesoramiento gratuito. Te ayudamos a elegir 
-            el volquete perfecto para tus necesidades.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="https://wa.me/5493412345678?text=Hola!%20Quiero%20solicitar%20un%20presupuesto" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-whatsapp inline-flex justify-center"
-            >
-              Solicitar presupuesto gratis
-            </a>
-          </div>
         </div>
       </div>
     </section>

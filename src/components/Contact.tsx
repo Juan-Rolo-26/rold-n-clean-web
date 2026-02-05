@@ -17,19 +17,19 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Dirección',
-    content: 'Av. San Martín 1234, Roldán, Santa Fe, Argentina',
+    content: 'Marcos Ateca 743, Roldán, Santa Fe, Argentina',
   },
   {
     icon: Phone,
     title: 'Teléfono',
-    content: '+54 9 341 234 5678',
-    href: 'tel:+5493412345678',
+    content: '341 362-3232',
+    href: 'tel:+5493413623232',
   },
   {
     icon: Mail,
     title: 'Email',
-    content: 'info@volquetesroldanlimpia.com',
-    href: 'mailto:info@volquetesroldanlimpia.com',
+    content: 'Mauricioandresbay123@hotmail.com',
+    href: 'mailto:Mauricioandresbay123@hotmail.com',
   },
   {
     icon: Clock,
@@ -97,10 +97,10 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="section-padding bg-muted">
+    <section id="contacto" data-reveal="fade-up" className="section-padding bg-muted">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div data-reveal="fade-up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
             Contacto
           </span>
@@ -116,7 +116,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-card rounded-2xl p-8 shadow-soft">
+          <div data-reveal="fade-right" className="bg-card rounded-2xl p-8 shadow-soft">
             <h3 className="heading-tertiary text-foreground mb-6">Envianos un mensaje</h3>
             
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -160,7 +160,7 @@ const Contact = () => {
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="+54 9 341 ..."
+                    placeholder="341 362-3232"
                     value={formData.phone}
                     onChange={handleChange}
                     className={errors.phone ? 'border-destructive' : ''}
@@ -203,11 +203,16 @@ const Contact = () => {
           </div>
 
           {/* Contact Info & Map */}
-          <div className="space-y-8">
+          <div data-reveal="fade-left" className="space-y-8">
             {/* Contact Cards */}
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
-                <div key={index} className="bg-card rounded-xl p-5 shadow-soft">
+                <div
+                  key={index}
+                  data-reveal="fade-up"
+                  data-reveal-delay={index * 90}
+                  className="bg-card rounded-xl p-5 shadow-soft"
+                >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-6 h-6 text-primary" />

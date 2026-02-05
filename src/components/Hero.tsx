@@ -1,109 +1,97 @@
-import { Phone, MessageCircle, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-volquete.jpg';
+
+// Importing assets
+import cartelRoldan from '@/assets/cartel-roldan.png';
+import volquetes3 from '@/assets/volquetes3.jpeg';
+import camion1 from '@/assets/camion1.jpeg';
+import camion2 from '@/assets/camion2.jpeg';
+import camion3 from '@/assets/camion3.jpeg';
+import volquetes4 from '@/assets/volquetes4.jpeg';
+import volquetes5 from '@/assets/volquetes5.jpeg';
+import volquetes6 from '@/assets/volquetes6.jpeg';
+import volquetes7 from '@/assets/volquetes7.jpeg';
+import imagen1 from '@/assets/imagen 1.jpeg';
+
+const heroImages = [
+  camion1,
+  volquetes3,
+  camion2,
+  volquetes4,
+  camion3,
+  volquetes5,
+  volquetes6,
+  volquetes7,
+  imagen1
+];
 
 const Hero = () => {
-  const handleScroll = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section
-      id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Background with gradient overlay */}
+    <section id="inicio" className="relative h-[calc(100svh-var(--header-height))] min-h-[calc(100svh-var(--header-height))] w-full overflow-hidden bg-black">
+
+      {/* Background Slider */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/85 to-primary-dark/95" />
+        <div className="absolute inset-0 bg-black/60 z-10" /> {/* Dark overlay for readability */}
+
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${currentImageIndex === index ? "opacity-100" : "opacity-0"
+              }`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
-
       {/* Content */}
-      <div className="relative z-10 container-custom text-center text-white">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-20 container-custom h-full flex flex-col justify-center items-center pt-14 md:pt-16 lg:pt-20 pb-20 text-center">
+        <div data-reveal="fade-up" className="max-w-4xl space-y-6 md:space-y-7 flex flex-col items-center">
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-8 animate-fade-in">
-            <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-            <span className="text-sm font-medium">Servicio disponible 24/7</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-sm tracking-wider uppercase">
+            <Star className="w-4 h-4 text-accent fill-accent" />
+            <span>Servicio Premium en Roldán</span>
           </div>
 
           {/* Heading */}
-          <h1 className="heading-primary text-white mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Volquetes{' '}
-            <span className="text-secondary">Roldán Limpia</span>
-          </h1>
+          <div className="space-y-2">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.1]">
+              VOLQUETES <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-white">
+                ROLDAN
+              </span>
+            </h1>
+          </div>
 
-          {/* Subheading */}
-          <p className="text-xl md:text-2xl text-white/90 mb-4 animate-slide-up font-light" style={{ animationDelay: '0.2s' }}>
-            Alquiler de Volquetes, Limpieza y Retiro de Residuos
-          </p>
-          
-          <p className="text-lg text-white/75 mb-10 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            Soluciones integrales para la gestión de residuos y venta de materiales de construcción. 
-            Servicio rápido, confiable y a precios competitivos.
+          {/* Description */}
+          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+            Soluciones integrales en movimiento de suelo y gestión de residuos.
+            <span className="block font-semibold text-white mt-2">Rapidez y confianza en cada entrega.</span>
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <a 
-              href="https://wa.me/5493412345678?text=Hola!%20Me%20interesa%20alquilar%20un%20volquete" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button size="lg" className="btn-whatsapp text-lg px-8 py-6 w-full sm:w-auto">
-                <MessageCircle className="w-5 h-5" />
-                Contactar por WhatsApp
-              </Button>
-            </a>
-            <a href="tel:+5493412345678">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-6 w-full sm:w-auto"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Llamar ahora
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full">
+            <a href="tel:+5493413623232">
+              <Button className="h-12 px-8 text-base rounded-full bg-accent hover:bg-accent-dark text-white font-semibold tracking-wide shadow-lg shadow-accent/30 hover:-translate-y-0.5 transition-transform">
+                <Phone className="w-5 h-5 mr-3" />
+                Llamar Ahora
               </Button>
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 animate-slide-up" style={{ animationDelay: '0.5s' }}>
-            {[
-              { value: '+500', label: 'Clientes satisfechos' },
-              { value: '+10', label: 'Años de experiencia' },
-              { value: '24hs', label: 'Respuesta rápida' },
-              { value: '100%', label: 'Compromiso' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-secondary mb-1">{stat.value}</div>
-                <div className="text-sm text-white/70">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
-
-        {/* Scroll indicator */}
-        <button 
-          onClick={() => handleScroll('#servicios')}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
-          aria-label="Scroll to services"
-        >
-          <ChevronDown className="w-8 h-8 text-white/60" />
-        </button>
       </div>
+
     </section>
   );
 };

@@ -26,10 +26,10 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section-padding bg-muted">
+    <section data-reveal="fade-up" className="section-padding bg-muted">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div data-reveal="fade-up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
             Testimonios
           </span>
@@ -48,6 +48,8 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
+              data-reveal="fade-up"
+              data-reveal-delay={index * 120}
               className="bg-card rounded-2xl p-8 shadow-soft card-hover relative"
             >
               {/* Quote icon */}
