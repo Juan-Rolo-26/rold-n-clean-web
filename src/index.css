@@ -12,11 +12,11 @@
     --primary-light: 115 65% 54%;
     --primary-dark: 83 49% 23%;
 
-    /* Secondary - Beige (#D9BCA3) */
-    --secondary: 28 41% 75%;
+    /* Secondary - Soft Red Tint */
+    --secondary: 8 55% 83%;
     --secondary-foreground: 83 49% 23%;
-    --secondary-light: 28 50% 85%;
-    --secondary-dark: 28 40% 65%;
+    --secondary-light: 8 65% 90%;
+    --secondary-dark: 8 45% 70%;
 
     /* Accent - Green 1 (#51D93D) for highlighting */
     --accent: 115 65% 54%;
@@ -110,7 +110,7 @@
   body {
     @apply text-foreground font-sans antialiased;
     font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 50%, #ffffff 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #fbf7f7 50%, #ffffff 100%);
     min-height: 100vh;
     position: relative;
   }
