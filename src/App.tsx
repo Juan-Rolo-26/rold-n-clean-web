@@ -65,7 +65,7 @@ const ContactPage = () => (
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen flex flex-col overflow-x-hidden">
         <Header />
         <ScrollReveal />
