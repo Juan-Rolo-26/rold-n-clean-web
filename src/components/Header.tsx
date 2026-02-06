@@ -72,7 +72,7 @@ const Header = () => {
           {/* Contact Details */}
           <div className="flex items-center gap-8 animate-fade-in-right delay-200">
             <div className="flex items-center gap-3 group cursor-pointer transform transition-all duration-300 hover:scale-105">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center text-primary transition-all duration-300 group-hover:from-primary group-hover:to-primary/80 group-hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-tertiary/10 to-tertiary/5 flex items-center justify-center text-tertiary transition-all duration-300 group-hover:from-tertiary group-hover:to-tertiary/80 group-hover:text-white group-hover:shadow-lg">
                 <Mail className="w-5 h-5 transition-all duration-300 group-hover:text-white" />
               </div>
               <div className="text-sm leading-tight">
@@ -92,7 +92,7 @@ const Header = () => {
             </div>
 
             <div className="flex items-center gap-3 group cursor-help transform transition-all duration-300 hover:scale-105">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/30 to-secondary/15 flex items-center justify-center text-primary transition-all duration-300 group-hover:from-secondary group-hover:to-secondary/80 group-hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-tertiary/15 to-tertiary/5 flex items-center justify-center text-tertiary transition-all duration-300 group-hover:from-tertiary group-hover:to-tertiary/80 group-hover:text-white group-hover:shadow-lg">
                 <Clock className="w-5 h-5 transition-all duration-300 group-hover:text-white" />
               </div>
               <div className="text-sm leading-tight">

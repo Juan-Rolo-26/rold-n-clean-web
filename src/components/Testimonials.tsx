@@ -30,24 +30,24 @@ const Testimonials = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div data-reveal="fade-up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
+          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-4">
             Testimonios
           </span>
           <h2 className="heading-secondary text-foreground mb-6">
             Lo que dicen nuestros{' '}
             <span className="text-primary">clientes</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            La satisfacción de nuestros clientes es nuestra mayor recompensa. 
-            Conoce sus experiencias trabajando con nosotros.
+          <p className="text-muted-foreground text-xl font-medium">
+            La confianza de nuestros clientes es nuestra mayor recompensa.
+            Conocé sus experiencias trabajando con nosotros.
           </p>
         </div>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               data-reveal="fade-up"
               data-reveal-delay={index * 120}
               className="bg-card rounded-2xl p-8 shadow-soft card-hover relative"
@@ -60,7 +60,7 @@ const Testimonials = () => {
               {/* Rating */}
               <div className="flex gap-1 mb-6">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                  <Star key={i} className="w-5 h-5 fill-tertiary text-tertiary" />
                 ))}
               </div>
 

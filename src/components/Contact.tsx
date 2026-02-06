@@ -65,15 +65,15 @@ const Contact = () => {
 
     try {
       const validatedData = contactSchema.parse(formData);
-      
+
       // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       toast({
         title: '¡Mensaje enviado!',
         description: 'Nos pondremos en contacto contigo a la brevedad.',
       });
-      
+
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -101,15 +101,15 @@ const Contact = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div data-reveal="fade-up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
+          <span className="inline-block text-tertiary font-semibold text-sm uppercase tracking-wider mb-4">
             Contacto
           </span>
           <h2 className="heading-secondary text-foreground mb-6">
-            ¿Tienes alguna consulta?{' '}
-            <span className="text-primary">Escribinos</span>
+            ¿Tenés alguna consulta?{' '}
+            <span className="text-primary">Te escuchamos</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Estamos para ayudarte. Completá el formulario o contactanos directamente 
+          <p className="text-muted-foreground text-xl font-medium">
+            Estamos cerca para ayudarte. Completá el formulario o contactanos directamente
             por teléfono o WhatsApp.
           </p>
         </div>
@@ -117,8 +117,8 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div data-reveal="fade-right" className="bg-card rounded-2xl p-8 shadow-soft">
-            <h3 className="heading-tertiary text-foreground mb-6">Envianos un mensaje</h3>
-            
+            <h3 className="heading-tertiary text-foreground mb-6">Escribinos, estamos cerca</h3>
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -185,9 +185,9 @@ const Contact = () => {
                 {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full btn-primary" 
+              <Button
+                type="submit"
+                className="w-full btn-primary"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -220,8 +220,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">{info.title}</h4>
                       {info.href ? (
-                        <a 
-                          href={info.href} 
+                        <a
+                          href={info.href}
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           {info.content}

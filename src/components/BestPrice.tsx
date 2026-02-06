@@ -13,10 +13,10 @@ const BestPrice = () => {
           ))}
         </div>
         <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-wide">
-          EL MEJOR PRECIO DEL MERCADO
+          PRECIO JUSTO, SERVICIO IMPECABLE
         </h2>
-        <p className="mt-3 text-red-200 font-semibold text-sm md:text-base">
-          Contamos con el mejor precio de mercado para volquetes y venta de tierra de Roldán.
+        <p className="mt-3 text-white/90 font-semibold text-lg md:text-xl font-medium">
+          <span className="text-tertiary font-bold">Precio claro</span> en volquetes y tierra en Roldán, con atención rápida y sin sorpresas.
         </p>
       </div>
     </section>

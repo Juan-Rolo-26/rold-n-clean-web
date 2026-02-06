@@ -78,14 +78,24 @@ const Stats = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} data-reveal="fade-up" className="py-20 bg-gradient-to-br from-green-50 to-white relative overflow-hidden">
-            <div className="container-custom">
+        <section ref={sectionRef} data-reveal="fade-up" className="py-24 bg-white relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#4d7c0f_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+            <div className="container-custom relative z-10">
                 {/* Header */}
                 <div className="text-center mb-16 animate-fade-in-up">
                     <h2 className="heading-secondary text-slate-800 mb-2">
-                        Números que nos <span className="text-accent">respaldan</span>
+                        Números que hablan de <span className="text-tertiary relative inline-block">
+                            confianza
+                            <svg className="absolute w-full h-1.5 bottom-1 left-0 text-tertiary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                            </svg>
+                        </span>
                     </h2>
-                    <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+                    <p className="text-slate-600 mt-4 max-w-2xl mx-auto text-xl font-medium">
+                        Resultados reales que respaldan nuestro compromiso con cada cliente.
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -94,7 +104,7 @@ const Stats = () => {
                             key={index}
                             stat={stat}
                             isVisible={isVisible}
-                            delay={index * 200}
+                            delay={index * 150}
                         />
                     ))}
                 </div>
@@ -104,22 +114,22 @@ const Stats = () => {
 };
 
 const StatItem = ({ stat, isVisible, delay }: { stat: any, isVisible: boolean, delay: number }) => {
-    const count = useCounter(stat.value, 2500, isVisible);
+    const count = useCounter(stat.value, 2000, isVisible);
 
     return (
         <div
-            className={`flex flex-col items-center text-center transform transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            className={`flex flex-col items-center text-center transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-90'}`}
             style={{ transitionDelay: `${delay}ms` }}
         >
-            <div className="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mb-4 shadow-sm">
-                <stat.icon className="w-8 h-8" />
+            <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center mb-6 shadow-sm border border-green-100 hover:shadow-md hover:scale-110 transition-all duration-300 group">
+                <stat.icon className="w-10 h-10 text-primary group-hover:text-tertiary transition-colors duration-300" />
             </div>
 
-            <div className="space-y-1">
-                <h3 className="text-4xl font-black text-slate-800 tabular-nums">
-                    {isVisible ? count.toLocaleString('es-AR') : '0'}{stat.suffix}
+            <div className="space-y-2">
+                <h3 className="text-5xl md:text-6xl font-black text-slate-900 tabular-nums tracking-tight">
+                    {isVisible ? count.toLocaleString('es-AR') : '0'}<span className="text-tertiary text-4xl align-top">{stat.suffix}</span>
                 </h3>
-                <p className="text-sm font-bold uppercase tracking-wider text-slate-500">
+                <p className="text-sm font-bold uppercase tracking-widest text-slate-500">
                     {stat.label}
                 </p>
             </div>

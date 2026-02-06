@@ -41,13 +41,13 @@ const SizesPage = () => (
 const EnvironmentPage = () => (
   <main className="main-offset animate-fade-in">
     <Environment />
-    <div className="section-padding bg-accent/5">
+    <div className="section-padding bg-tertiary/5">
       <div className="container-custom text-center animate-slide-up-fade delay-200">
-        <h3 className="heading-secondary mb-8">Nuestra Huella Verde</h3>
+        <h3 className="heading-secondary mb-8">Nuestra Huella de Cuidado</h3>
         <p className="max-w-3xl mx-auto text-xl text-muted-foreground leading-loose">
-          Cada volquete que recuperamos es un paso más hacia una ciudad más limpia.
-          Colaboramos activamente con plantas de reciclaje certificadas para asegurar que los residuos
-          sean tratados con la responsabilidad que nuestro planeta merece.
+          Cada volquete que retiramos es un paso más hacia una ciudad más limpia y amable.
+          Colaboramos con plantas de reciclaje certificadas para que los residuos se traten
+          con la responsabilidad que nuestro planeta merece.
         </p>
       </div>
     </div>
@@ -89,6 +89,9 @@ const ScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
     if (!elements.length) return;
 
@@ -107,7 +110,7 @@ const ScrollReveal = () => {
           }
         });
       },
-      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
     );
 
     elements.forEach((el) => {

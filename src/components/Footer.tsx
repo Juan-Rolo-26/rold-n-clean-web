@@ -22,7 +22,7 @@ const Footer = () => {
             </div>
             <p className="text-white/80 mb-8 max-w-md text-lg leading-relaxed">
               Más de 5 años brindando soluciones en alquiler de volquetes, venta de
-              materiales y gestión de residuos. Tu proyecto, nuestra prioridad.
+              materiales y gestión de residuos. Tu obra, nuestro orgullo.
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
@@ -107,7 +107,7 @@ const Footer = () => {
               Medios de Pago
             </h4>
             <p className="text-white/80 text-2xl max-w-2xl mx-auto">
-              Aceptamos todas las formas de pago para tu comodidad
+              Aceptamos todas las formas de pago para tu tranquilidad
             </p>
             <div className="bg-white/10 p-12 md:p-16 rounded-3xl backdrop-blur-sm shadow-2xl max-w-5xl mx-auto border-4 border-white/20 transform hover:scale-105 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(255,255,255,0.3)]">
               <img
@@ -128,7 +128,7 @@ const Footer = () => {
               © {currentYear} Volcadores Roldan. Todos los derechos reservados.
             </p>
             <p className="text-white/60 text-base">
-              Diseñado con ❤️ para nuestros clientes
+              Diseñado con cariño para nuestros clientes
             </p>
           </div>
         </div>

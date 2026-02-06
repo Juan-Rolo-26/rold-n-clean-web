@@ -42,12 +42,12 @@ const ContainerSizes = () => {
 
             <div className="container-custom">
                 <div className="text-center max-w-2xl mx-auto mb-12">
-                    <span className="text-accent font-bold uppercase tracking-widest text-sm block mb-2">Capacidades</span>
+                    <span className="text-tertiary font-bold uppercase tracking-widest text-sm block mb-2">Capacidades</span>
                     <h2 className="heading-secondary text-slate-800 mb-4">
-                        El tamaño ideal para <span className="text-accent">tu necesidad</span>
+                        El tamaño ideal para <span className="text-primary">tu necesidad</span>
                     </h2>
                     <p className="text-slate-600">
-                        Seleccioná el contenedor que mejor se adapte a la magnitud de tu proyecto.
+                        Seleccioná el contenedor que mejor acompañe la magnitud de tu proyecto.
                     </p>
                 </div>
 
@@ -64,30 +64,30 @@ const ContainerSizes = () => {
                         >
                             {/* Recommended Badge */}
                             {item.recommended && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 shadow-md">
-                                    <Sparkles className="w-3 h-3" /> Recomendado
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-tertiary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 shadow-md">
+                                    <Sparkles className="w-3 h-3" /> Más elegido
                                 </div>
                             )}
 
                             <div className="text-center mb-6">
                                 <div className={`inline-block p-4 rounded-xl mb-3 ${item.recommended ? 'bg-white/10' : 'bg-slate-100'}`}>
-                                    <span className="text-3xl font-black block">{item.size}</span>
+                                    <span className="text-4xl font-black block">{item.size}</span>
                                 </div>
-                                <h3 className={`text-xl font-bold mb-2 ${item.recommended ? 'text-white' : 'text-slate-800'}`}>{item.title}</h3>
-                                <p className={`text-sm ${item.recommended ? 'text-slate-300' : 'text-slate-500'} h-10`}>
+                                <h3 className={`text-2xl font-bold mb-2 ${item.recommended ? 'text-white' : 'text-slate-800'}`}>{item.title}</h3>
+                                <p className={`text-base ${item.recommended ? 'text-slate-300' : 'text-slate-500'} h-12`}>
                                     {item.description}
                                 </p>
                             </div>
 
-                            <div className={`text-sm rounded-lg p-3 mb-6 flex items-center justify-center gap-2 ${item.recommended ? 'bg-white/10' : 'bg-slate-50'}`}>
-                                <Ruler className="w-4 h-4 opacity-70" />
+                            <div className={`text-base rounded-lg p-3 mb-6 flex items-center justify-center gap-2 ${item.recommended ? 'bg-white/10' : 'bg-slate-50'}`}>
+                                <Ruler className="w-5 h-5 opacity-70" />
                                 <span className="font-mono">{item.dimensions}</span>
                             </div>
 
                             <ul className="space-y-3 mb-8">
                                 {item.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-sm">
-                                        <Check className={`w-4 h-4 mt-0.5 ${item.recommended ? 'text-accent' : 'text-green-600'}`} />
+                                    <li key={i} className="flex items-start gap-3 text-base">
+                                        <Check className={`w-5 h-5 mt-0.5 ${item.recommended ? 'text-tertiary' : 'text-green-600'}`} />
                                         <span className={item.recommended ? 'text-slate-200' : 'text-slate-600'}>
                                             {feature}
                                         </span>
@@ -96,8 +96,8 @@ const ContainerSizes = () => {
                             </ul>
 
                             <a href={`https://wa.me/5493413623232?text=Hola!%20Me%20interesa%20el%20volquete%20de%20${encodeURIComponent(item.size)}`}>
-                                <Button className={`w-full rounded-xl font-semibold ${item.recommended
-                                        ? 'bg-accent hover:bg-accent-dark text-white'
+                                <Button className={`w-full rounded-xl font-semibold text-base md:text-lg ${item.recommended
+                                        ? 'bg-tertiary hover:bg-tertiary-dark text-white'
                                         : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
                                     }`}>
                                     Elegir {item.title}
