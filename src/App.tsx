@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ChatBot from './components/ChatBot';
 import Hero from './components/Hero';
 import BestPrice from './components/BestPrice';
 import Services from './components/Services';
@@ -10,7 +11,6 @@ import Environment from './components/Environment';
 import Stats from './components/Stats';
 import WhyChooseUs from './components/WhyChooseUs';
 import ContainerSizes from './components/ContainerSizes';
-import CallToAction from './components/CallToAction';
 import Contact from './components/Contact';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
@@ -22,7 +22,6 @@ const HomePage = () => (
     <BestPrice />
     <Stats />
     <WhyChooseUs />
-    <CallToAction />
   </main>
 );
 
@@ -51,7 +50,6 @@ const EnvironmentPage = () => (
         </p>
       </div>
     </div>
-    <CallToAction />
   </main>
 );
 
@@ -78,6 +76,7 @@ const App = () => {
         </Routes>
         <Footer />
         <WhatsAppButton />
+        <ChatBot />
       </div>
     </BrowserRouter>
   );
