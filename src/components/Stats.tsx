@@ -4,13 +4,13 @@ import { Truck, Users, MapPin, Building2, Clock, Award } from 'lucide-react';
 const stats = [
     {
         icon: Truck,
-        value: 4000,
+        value: 6000,
         label: 'Volquetes Entregados',
         suffix: '+'
     },
     {
         icon: Users,
-        value: 500,
+        value: 4000,
         label: 'Clientes Felices',
         suffix: '+'
     },
@@ -78,14 +78,14 @@ const Stats = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} data-reveal="fade-up" className="py-24 bg-white relative overflow-hidden">
+        <section ref={sectionRef} data-reveal="fade-up" className="py-16 md:py-24 bg-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#4d7c0f_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-            <div className="container-custom relative z-10">
+            <div className="container-custom relative z-10 px-4 sm:px-6">
                 {/* Header */}
-                <div className="text-center mb-16 animate-fade-in-up">
-                    <h2 className="heading-secondary text-slate-800 mb-2">
+                <div className="text-center mb-10 md:mb-16 animate-fade-in-up">
+                    <h2 className="heading-secondary text-slate-800 mb-2 px-2">
                         Números que hablan de <span className="text-tertiary relative inline-block">
                             confianza
                             <svg className="absolute w-full h-1.5 bottom-1 left-0 text-tertiary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -93,19 +93,30 @@ const Stats = () => {
                             </svg>
                         </span>
                     </h2>
-                    <p className="text-slate-600 mt-4 max-w-2xl mx-auto text-xl font-medium">
+                    <p className="text-slate-600 mt-2 sm:mt-4 max-w-2xl mx-auto text-lg sm:text-xl font-medium px-2">
                         Resultados reales que respaldan nuestro compromiso con cada cliente.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
                     {stats.map((stat, index) => (
-                        <StatItem
+                        <div
                             key={index}
-                            stat={stat}
-                            isVisible={isVisible}
-                            delay={index * 150}
-                        />
+                            className={`flex flex-col items-center text-center transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-90'}`}
+                            style={{ transitionDelay: `${index * 150}ms` }}
+                        >
+                            <StatItemIcon icon={stat.icon} />
+
+                            <div className="space-y-1 sm:space-y-2">
+                                <h3 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 tabular-nums tracking-tight">
+                                    <StatCounter value={stat.value} isVisible={isVisible} />
+                                    <span className="text-tertiary text-2xl sm:text-4xl align-top">{stat.suffix}</span>
+                                </h3>
+                                <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 px-1">
+                                    {stat.label}
+                                </p>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -113,28 +124,15 @@ const Stats = () => {
     );
 };
 
-const StatItem = ({ stat, isVisible, delay }: { stat: any, isVisible: boolean, delay: number }) => {
-    const count = useCounter(stat.value, 2000, isVisible);
+const StatItemIcon = ({ icon: Icon }: { icon: any }) => (
+    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[1.5rem] sm:rounded-[2rem] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center mb-4 sm:mb-6 shadow-sm border border-green-100 hover:shadow-md hover:scale-110 transition-all duration-300 group">
+        <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary group-hover:text-tertiary transition-colors duration-300" />
+    </div>
+);
 
-    return (
-        <div
-            className={`flex flex-col items-center text-center transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-90'}`}
-            style={{ transitionDelay: `${delay}ms` }}
-        >
-            <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center mb-6 shadow-sm border border-green-100 hover:shadow-md hover:scale-110 transition-all duration-300 group">
-                <stat.icon className="w-10 h-10 text-primary group-hover:text-tertiary transition-colors duration-300" />
-            </div>
-
-            <div className="space-y-2">
-                <h3 className="text-5xl md:text-6xl font-black text-slate-900 tabular-nums tracking-tight">
-                    {isVisible ? count.toLocaleString('es-AR') : '0'}<span className="text-tertiary text-4xl align-top">{stat.suffix}</span>
-                </h3>
-                <p className="text-sm font-bold uppercase tracking-widest text-slate-500">
-                    {stat.label}
-                </p>
-            </div>
-        </div>
-    );
+const StatCounter = ({ value, isVisible }: { value: number, isVisible: boolean }) => {
+    const count = useCounter(value, 2000, isVisible);
+    return <>{isVisible ? count.toLocaleString('es-AR') : '0'}</>;
 };
 
 export default Stats;

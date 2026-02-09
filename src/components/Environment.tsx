@@ -51,13 +51,6 @@ const Environment = () => {
                         </div>
                     </div>
 
-                    <div className="pt-4">
-                        <a href="#contacto">
-                            <Button className="bg-tertiary hover:bg-tertiary-dark text-white px-8 py-6 rounded-xl text-lg font-bold shadow-lg shadow-tertiary/20">
-                                Sumate al cuidado
-                            </Button>
-                        </a>
-                    </div>
                 </div>
 
             </div>

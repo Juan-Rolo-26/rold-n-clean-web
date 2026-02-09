@@ -105,9 +105,9 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar */}
-      <div className={`w-full transition-all duration-500 shadow-xl bg-gradient-to-r from-primary via-primary/95 to-primary backdrop-blur-sm ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} delay-100`}>
+      <div className={`w-full transition-all duration-500 shadow-2xl bg-gradient-to-r from-primary via-emerald-500 to-primary backdrop-blur-sm ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} delay-100`}>
         <div className="container-custom">
-          <div className="flex items-center justify-between h-14 md:h-14">
+          <div className="flex items-center justify-between h-16 md:h-16">
 
             {/* Mobile Logo */}
             <Link to="/" className="md:hidden flex items-center gap-2 animate-fade-in-left">
@@ -115,18 +115,37 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 w-full justify-center">
+            <nav className="hidden md:flex items-center gap-2 w-full justify-center">
               {navLinks.map((link, idx) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-6 py-2 rounded-xl font-bold text-base uppercase tracking-wide transition-all duration-500 transform hover:-translate-y-0.5 animate-fade-in-down relative overflow-hidden group ${location.pathname === link.path
-                    ? 'bg-white text-primary shadow-lg scale-105'
-                    : 'text-white hover:bg-white/10 hover:text-white'
-                    }`}
+                  className={`
+                    relative px-7 py-3 font-bold text-base uppercase tracking-wide 
+                    transition-all duration-700 ease-out
+                    transform hover:-translate-y-1 hover:scale-105
+                    animate-fade-in-down group
+                    ${location.pathname === link.path
+                      ? 'text-primary'
+                      : 'text-white hover:text-white'
+                    }
+                  `}
                   style={{ animationDelay: `${300 + idx * 100}ms` }}
                 >
-                  <span className="relative z-10">{link.name}</span>
+                  {/* Fondo activo con efecto de pulso suave */}
+                  {location.pathname === link.path && (
+                    <>
+                      <span className="absolute inset-0 bg-white rounded-2xl shadow-2xl shadow-white/30 animate-pulse-slow"></span>
+                    </>
+                  )}
+
+                  {/* Fondo hover limpio y moderno - SIN barrita */}
+                  {location.pathname !== link.path && (
+                    <span className="absolute inset-0 bg-white/15 backdrop-blur-md rounded-2xl scale-95 group-hover:scale-100 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 shadow-lg group-hover:shadow-white/20"></span>
+                  )}
+
+                  {/* Texto con mejor legibilidad */}
+                  <span className="relative z-10 drop-shadow-lg">{link.name}</span>
                 </Link>
               ))}
             </nav>
@@ -141,32 +160,43 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Optimizado para celular */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-gradient-to-b from-primary to-primary/95 border-t border-white/10 animate-slide-down backdrop-blur-md">
-            <div className="container-custom py-6 flex flex-col gap-4">
+            <div className="container-custom py-6 px-4 flex flex-col gap-3">
               {navLinks.map((link, idx) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-bold text-base py-4 px-6 rounded-2xl transform transition-all duration-300 hover:scale-105 animate-fade-in-up ${location.pathname === link.path
-                    ? 'bg-white text-primary shadow-xl'
-                    : 'text-white hover:bg-white/15 backdrop-blur-sm'
+                  className={`font-bold text-lg py-4 px-6 rounded-2xl transform transition-all duration-300 active:scale-95 animate-fade-in-up text-center ${location.pathname === link.path
+                    ? 'bg-white text-primary shadow-2xl'
+                    : 'text-white bg-white/10 active:bg-white/20 backdrop-blur-sm'
                     }`}
                   style={{ animationDelay: `${idx * 75}ms` }}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex flex-col gap-5 mt-4 pt-5 border-t border-white/20 text-white text-base px-6">
-                <div className="flex items-center gap-4 hover:bg-white/10 p-3 rounded-xl transition-all duration-300">
-                  <Mail className="w-5 h-5" />
-                  <span className="font-medium">Mauricioandresbay123@hotmail.com</span>
-                </div>
-                <div className="flex items-center gap-4 hover:bg-white/10 p-3 rounded-xl transition-all duration-300">
+
+              {/* Sección de contacto más elegante para móvil */}
+              <div className="flex flex-col gap-3 mt-4 pt-5 border-t border-white/20">
+                {/* Botón de Llamada CTA */}
+                <a
+                  href="tel:+5493413623232"
+                  className="flex items-center justify-center gap-3 bg-white text-primary font-bold text-lg py-4 px-6 rounded-2xl shadow-xl active:scale-95 transition-transform duration-200"
+                >
                   <Phone className="w-5 h-5" />
-                  <span className="font-medium text-lg">341 362-3232</span>
-                </div>
+                  <span>341 362-3232</span>
+                </a>
+
+                {/* Email con tamaño ajustado */}
+                <a
+                  href="mailto:Mauricioandresbay123@hotmail.com"
+                  className="flex items-center justify-center gap-3 bg-white/10 text-white font-medium text-sm py-3 px-4 rounded-xl backdrop-blur-sm active:bg-white/20 transition-all duration-200"
+                >
+                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <span className="truncate">Mauricioandresbay123@hotmail.com</span>
+                </a>
               </div>
             </div>
           </div>

@@ -18,8 +18,8 @@ import About from './components/About';
 // Page Components with Advanced Entry Animations
 const HomePage = () => (
   <main className="main-offset animate-slide-up-fade">
-    <Hero />
     <BestPrice />
+    <Hero />
     <Stats />
     <WhyChooseUs />
   </main>

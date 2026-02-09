@@ -54,18 +54,18 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container-custom h-full flex flex-col justify-center items-center pt-14 md:pt-16 lg:pt-20 pb-20 text-center">
-        <div data-reveal="fade-up" className="max-w-4xl space-y-6 md:space-y-7 flex flex-col items-center">
+      <div className="relative z-20 container-custom h-full flex flex-col justify-center items-center pt-12 sm:pt-14 md:pt-16 lg:pt-20 pb-16 sm:pb-20 text-center px-4 sm:px-6">
+        <div data-reveal="fade-up" className="max-w-4xl space-y-5 sm:space-y-6 md:space-y-7 flex flex-col items-center w-full">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-sm tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium text-xs sm:text-sm tracking-wider uppercase">
             <Star className="w-4 h-4 text-tertiary fill-tertiary" />
             <span>Tu obra, cuidada y a tiempo</span>
           </div>
 
-          {/* Heading */}
+          {/* Heading - Mejor escalado móvil */}
           <div className="space-y-2">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.1]">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.1] px-2">
               VOLQUETES <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white/90 to-tertiary">
                 ROLDAN
@@ -73,16 +73,16 @@ const Hero = () => {
             </h1>
           </div>
 
-          {/* Description */}
-          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+          {/* Description - Más pequeña en móvil */}
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-2xl leading-relaxed px-4">
             Volquetes, tierra y retiro de residuos con atención cercana.
             <span className="block font-semibold text-white mt-2">Orden, limpieza y confianza en cada entrega.</span>
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full">
-            <a href="tel:+5493413623232">
-              <Button className="h-12 px-8 text-base rounded-full bg-primary hover:bg-primary/90 text-white font-semibold tracking-wide shadow-lg shadow-primary/30 hover:-translate-y-0.5 transition-transform ring-2 ring-tertiary/30">
+          {/* CTA Buttons - Más grandes y cómodos en móvil */}
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full max-w-md sm:max-w-none">
+            <a href="tel:+5493413623232" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto h-14 sm:h-12 px-8 text-base sm:text-base rounded-full bg-primary hover:bg-primary/90 text-white font-semibold tracking-wide shadow-lg shadow-primary/30 hover:-translate-y-0.5 active:scale-95 transition-all ring-2 ring-tertiary/30">
                 <Phone className="w-5 h-5 mr-3" />
                 Llamar y coordinar
               </Button>

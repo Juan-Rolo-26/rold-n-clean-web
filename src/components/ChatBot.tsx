@@ -114,33 +114,52 @@ const ChatBot = () => {
 
     return (
         <>
-            {/* Botón flotante - Posicionado a la izquierda para no superponerse con redes sociales */}
-            <div className="fixed bottom-6 left-6 z-50">
+            {/* Botón flotante - Responsive: más pequeño en móvil */}
+            <div className="fixed bottom-20 sm:bottom-6 left-4 sm:left-6 z-40">
                 {!isOpen && (
                     <Button
                         onClick={() => setIsOpen(true)}
-                        className="group relative h-16 w-16 rounded-full bg-gradient-to-br from-primary via-primary-light to-tertiary shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-110 border-4 border-white"
+                        className="group relative h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-gradient-to-br from-primary via-primary-light to-tertiary shadow-2xl hover:shadow-primary/50 transition-all duration-500 hover:scale-110 border-0 overflow-visible"
                     >
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
-                        <MessageCircle className="w-7 h-7 text-white relative z-10" />
-
-                        {/* Badge de notificación */}
-                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-tertiary rounded-full flex items-center justify-center animate-bounce">
-                            <Sparkles className="w-3 h-3 text-white" />
+                        {/* Anillo exterior giratorio 1 */}
+                        <div className="absolute inset-0 rounded-full border-2 border-white/30 animate-spin" style={{ animationDuration: '8s' }}>
+                            <div className="absolute -top-1 left-1/2 w-2 h-2 bg-white rounded-full shadow-lg shadow-white/50" />
                         </div>
 
-                        {/* Tooltip */}
-                        <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                            ¿Necesitás ayuda? 🏗️
-                            <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border-8 border-transparent border-r-slate-900" />
+                        {/* Anillo exterior giratorio 2 - dirección opuesta */}
+                        <div className="absolute inset-1 rounded-full border-2 border-dashed border-white/20 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }}>
+                            <div className="absolute top-1/2 -right-1 w-1.5 h-1.5 bg-yellow-300 rounded-full shadow-lg shadow-yellow-300/50" />
+                        </div>
+
+                        {/* Fondo con efecto de pulso */}
+                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary to-tertiary animate-pulse" style={{ animationDuration: '3s' }} />
+
+                        {/* Centro con ícono de Bot/IA */}
+                        <div className="relative z-10 w-full h-full flex items-center justify-center">
+                            {/* Ícono principal del Bot - Responsive */}
+                            <Bot className="w-12 h-12 sm:w-16 sm:h-16 text-white drop-shadow-lg" />
+
+                            {/* Partículas brillantes flotantes */}
+                            <div className="absolute top-3 right-2 w-1 h-1 bg-white rounded-full animate-ping" style={{ animationDuration: '2s' }} />
+                            <div className="absolute bottom-4 left-3 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.7s' }} />
+                            <div className="absolute top-1/2 right-1 w-1 h-1 bg-cyan-300 rounded-full animate-ping" style={{ animationDuration: '3s', animationDelay: '1s' }} />
+                        </div>
+
+                        {/* Efecto de brillo en hover */}
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        {/* Tooltip mejorado */}
+                        <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-2xl border border-white/10">
+                            💬 Chateá con RoldánIA
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border-[6px] border-transparent border-r-slate-900" />
                         </div>
                     </Button>
                 )}
             </div>
 
-            {/* Ventana del chat - MUCHO MÁS GRANDE */}
+            {/* Ventana del chat - Responsive: fullscreen en móvil, ventana en desktop */}
             {isOpen && (
-                <div className="fixed bottom-6 left-6 z-50 w-[500px] h-[750px] flex flex-col bg-white rounded-3xl shadow-2xl border-2 border-primary/20 overflow-hidden animate-scale-in">
+                <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-50 w-full h-full sm:w-[500px] md:w-[625px] sm:h-[700px] md:h-[850px] flex flex-col bg-white sm:rounded-3xl shadow-2xl border-0 sm:border-2 border-primary/20 overflow-hidden animate-scale-in">
                     {/* Header mejorado */}
                     <div className="relative bg-gradient-to-br from-primary via-primary-light to-tertiary p-6 text-white">
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXwid2lkdGg9IjEiLz48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvczJnPg==')] opacity-30" />

@@ -92,17 +92,17 @@ const Services = () => {
   return (
     <div className="flex flex-col gap-0">
       {/* --- SECTION 1: General Services --- */}
-      <section id="servicios" data-reveal="fade-up" className="section-padding bg-slate-50 relative overflow-hidden">
-        <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <span className="text-tertiary font-bold uppercase tracking-widest text-sm mb-2 block">Nuestra Oferta</span>
-            <h2 className="heading-secondary text-slate-800 mb-6">Soluciones completas para tu obra</h2>
-            <p className="text-slate-600 text-xl font-medium">
+      <section id="servicios" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden">
+        <div className="container-custom relative z-10 px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+            <span className="text-tertiary font-bold uppercase tracking-widest text-xs sm:text-sm mb-2 block">Nuestra Oferta</span>
+            <h2 className="heading-secondary text-slate-800 mb-4 sm:mb-6 px-2">Soluciones completas para tu obra</h2>
+            <p className="text-slate-600 text-lg sm:text-xl font-medium px-2">
               Te acompañamos de principio a fin con logística, cuidado y trato cercano.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {serviceItems.map((service, index) => (
               <div
                 key={index}
@@ -110,28 +110,28 @@ const Services = () => {
                 data-reveal-delay={index * 120}
                 className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full border border-slate-100"
               >
-                <div className="h-48 overflow-hidden relative">
+                <div className="h-48 sm:h-56 md:h-48 lg:h-56 overflow-hidden relative">
                   <div className={`absolute inset-0 ${service.color}/20 z-10 mix-blend-multiply transition-opacity group-hover:opacity-0`} />
                   <img
                     src={service.image}
                     alt={service.title}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 right-4 bg-white p-3 rounded-2xl shadow-md z-20">
-                    <service.icon className={`w-6 h-6 ${service.color.replace('bg-', 'text-')}`} />
+                  <div className="absolute top-4 right-4 bg-white p-2 sm:p-3 rounded-2xl shadow-md z-20">
+                    <service.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${service.color.replace('bg-', 'text-')}`} />
                   </div>
                 </div>
 
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-3xl font-bold text-slate-800 mb-3">{service.title}</h3>
-                  <p className="text-slate-600 mb-6 flex-1 text-base md:text-lg leading-relaxed">
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2 sm:mb-3">{service.title}</h3>
+                  <p className="text-slate-600 mb-4 sm:mb-6 flex-1 text-base sm:text-lg leading-relaxed">
                     {service.description}
                   </p>
 
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-base text-slate-700 font-medium">
-                        <CheckCircle2 className="w-5 h-5 text-tertiary" />
+                      <li key={idx} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-slate-700 font-medium">
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-tertiary flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -144,55 +144,55 @@ const Services = () => {
       </section>
 
       {/* --- SECTION 2: Container Sizes --- */}
-      <section id="tamanos" data-reveal="fade-up" className="section-padding bg-white relative overflow-hidden border-t border-slate-100">
-        <div className="container-custom">
+      <section id="tamanos" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-slate-100">
+        <div className="container-custom px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
-            <span className="text-tertiary font-bold uppercase tracking-widest text-sm block mb-2">Capacidades</span>
-            <h2 className="heading-secondary text-slate-800 mb-4">
+            <span className="text-tertiary font-bold uppercase tracking-widest text-xs sm:text-sm block mb-2">Capacidades</span>
+            <h2 className="heading-secondary text-slate-800 mb-4 px-2">
               Tamaños pensados para <span className="text-primary">tu obra</span>
             </h2>
-            <p className="text-slate-600 text-xl font-medium">
+            <p className="text-slate-600 text-lg sm:text-xl font-medium px-2">
               Elegí el contenedor que mejor se adapta a tu proyecto y a tu tiempo.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {sizes.map((item, index) => (
               <div
                 key={index}
                 data-reveal="fade-up"
                 data-reveal-delay={index * 90}
-                className={`relative rounded-2xl p-6 transition-all duration-300 border ${item.recommended
-                  ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-105 z-10'
+                className={`relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border ${item.recommended
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-100 sm:scale-105 z-10 my-4 sm:my-0'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-tertiary/30 hover:shadow-xl hover:-translate-y-2'
                   }`}
               >
                 {/* Recommended Badge */}
                 {item.recommended && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-tertiary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 shadow-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-tertiary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1 shadow-md whitespace-nowrap z-20">
                     <Sparkles className="w-3 h-3" /> Más elegido
                   </div>
                 )}
 
-                <div className="text-center mb-6">
-                  <div className={`inline-block p-4 rounded-xl mb-3 ${item.recommended ? 'bg-white/10' : 'bg-slate-100'}`}>
-                    <span className="text-4xl font-black block">{item.size}</span>
+                <div className="text-center mb-4 sm:mb-6">
+                  <div className={`inline-block p-3 sm:p-4 rounded-xl mb-3 ${item.recommended ? 'bg-white/10' : 'bg-slate-100'}`}>
+                    <span className="text-3xl sm:text-4xl font-black block">{item.size}</span>
                   </div>
-                  <h3 className={`text-2xl font-bold mb-2 ${item.recommended ? 'text-white' : 'text-slate-800'}`}>{item.title}</h3>
-                  <p className={`text-base ${item.recommended ? 'text-slate-300' : 'text-slate-500'} h-12`}>
+                  <h3 className={`text-xl sm:text-2xl font-bold mb-2 ${item.recommended ? 'text-white' : 'text-slate-800'}`}>{item.title}</h3>
+                  <p className={`text-sm sm:text-base ${item.recommended ? 'text-slate-300' : 'text-slate-500'} h-auto sm:h-12`}>
                     {item.description}
                   </p>
                 </div>
 
-                <div className={`text-base rounded-lg p-3 mb-6 flex items-center justify-center gap-2 ${item.recommended ? 'bg-white/10' : 'bg-slate-50'}`}>
-                  <Ruler className="w-5 h-5 opacity-70" />
+                <div className={`text-sm sm:text-base rounded-lg p-2 sm:p-3 mb-4 sm:mb-6 flex items-center justify-center gap-2 ${item.recommended ? 'bg-white/10' : 'bg-slate-50'}`}>
+                  <Ruler className="w-4 h-4 sm:w-5 sm:h-5 opacity-70" />
                   <span className="font-mono">{item.dimensions}</span>
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                   {item.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-base">
-                      <Check className={`w-5 h-5 mt-0.5 ${item.recommended ? 'text-tertiary' : 'text-green-600'}`} />
+                    <li key={i} className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
+                      <Check className={`w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0 ${item.recommended ? 'text-tertiary' : 'text-green-600'}`} />
                       <span className={item.recommended ? 'text-slate-200' : 'text-slate-600'}>
                         {feature}
                       </span>
@@ -200,8 +200,8 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <a href={`https://wa.me/5493413623232?text=Hola!%20Me%20interesa%20el%20volquete%20de%20${encodeURIComponent(item.size)}`}>
-                  <Button className={`w-full rounded-xl font-semibold text-base md:text-lg ${item.recommended
+                <a href={`https://wa.me/5493413623232?text=Hola!%20Me%20interesa%20el%20volquete%20de%20${encodeURIComponent(item.size)}`} className="block mt-auto">
+                  <Button className={`w-full rounded-xl font-semibold text-base md:text-lg py-6 ${item.recommended
                     ? 'bg-tertiary hover:bg-tertiary-dark text-white'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
                     }`}>
@@ -215,53 +215,53 @@ const Services = () => {
       </section>
 
       {/* --- SECTION 3: Earth Types --- */}
-      <section id="tierras" data-reveal="fade-up" className="section-padding bg-slate-50 relative overflow-hidden border-t border-slate-100">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div data-reveal="fade-right" className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px]">
+      <section id="tierras" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden border-t border-slate-100">
+        <div className="container-custom px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div data-reveal="fade-right" className="relative rounded-3xl overflow-hidden shadow-2xl h-[300px] sm:h-[400px]">
               <img
                 src={volqueteTierra}
                 alt="Movimiento de Tierra"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-6 left-6 text-white">
+              <div className="absolute bottom-6 left-6 text-white pr-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-tertiary/90 rounded-full text-xs font-bold uppercase mb-2">
                   <Shovel className="w-3 h-3" /> Calidad Premium
                 </div>
-                <h3 className="text-2xl font-bold">Venta y Movimiento de Tierra</h3>
+                <h3 className="text-xl sm:text-2xl font-bold">Venta y Movimiento de Tierra</h3>
               </div>
             </div>
 
-            <div data-reveal="fade-left" className="space-y-8">
+            <div data-reveal="fade-left" className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="heading-secondary text-slate-800 mb-4">Tipos de <span className="text-tertiary">tierra</span></h2>
-                <p className="text-slate-600 text-xl font-medium">
+                <h2 className="heading-secondary text-slate-800 mb-3 sm:mb-4 px-1">Tipos de <span className="text-tertiary">tierra</span></h2>
+                <p className="text-slate-600 text-lg sm:text-xl font-medium px-1">
                   Abastecemos tu obra o jardín con tierra de calidad, a granel o en volquetes.
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {earthTypes.map((earth, idx) => (
                   <div
                     key={idx}
                     data-reveal="fade-up"
                     data-reveal-delay={idx * 80}
-                    className="flex gap-4 p-4 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <div className={`w-12 h-12 rounded-lg ${earth.color} flex items-center justify-center flex-shrink-0 text-white shadow-lg`}>
-                      <Mountain className="w-6 h-6" />
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg ${earth.color} flex items-center justify-center flex-shrink-0 text-white shadow-lg`}>
+                      <Mountain className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-800 text-lg">{earth.name}</h4>
+                      <h4 className="font-bold text-slate-800 text-base sm:text-lg">{earth.name}</h4>
                       <p className="text-slate-600 text-sm">{earth.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <a href="https://wa.me/5493413623232?text=Hola!%20Me%20interesa%20comprar%20tierra" className="inline-block mt-4">
-                <Button className="bg-slate-900 text-white px-8 py-6 rounded-xl text-lg hover:bg-slate-800 shadow-xl">
+              <a href="https://wa.me/5493413623232?text=Hola!%20Me%20interesa%20comprar%20tierra" className="inline-block mt-4 w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-slate-900 text-white px-8 py-6 rounded-xl text-lg hover:bg-slate-800 shadow-xl">
                   Consultar Precio de Tierra
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
