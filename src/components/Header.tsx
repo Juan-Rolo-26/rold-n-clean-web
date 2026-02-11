@@ -109,9 +109,13 @@ const Header = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-16">
 
-            {/* Mobile Logo */}
+            {/* Mobile Logo - Mejorado con mejor contraste */}
             <Link to="/" className="md:hidden flex items-center gap-2 animate-fade-in-left">
-              <span className="text-white font-extrabold text-xl tracking-tight">Volquetes Roldan</span>
+              <img
+                src={logo}
+                alt="Volquetes Roldan"
+                className="h-10 object-contain drop-shadow-xl"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -150,53 +154,67 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Mejorado con mejor visibilidad */}
             <button
-              className="md:hidden p-3 text-white rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-110 active:scale-95"
+              className="md:hidden p-2.5 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all duration-300 transform hover:scale-110 active:scale-95 border border-white/30 shadow-lg"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
-              {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2.5} /> : <Menu className="w-7 h-7" strokeWidth={2.5} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu - Optimizado para celular */}
+        {/* Mobile Menu - COMPLETAMENTE REDISEÑADO para máxima visibilidad */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-gradient-to-b from-primary to-primary/95 border-t border-white/10 animate-slide-down backdrop-blur-md">
+          <div className="md:hidden bg-white border-t-4 border-primary animate-slide-down shadow-2xl">
             <div className="container-custom py-6 px-4 flex flex-col gap-3">
               {navLinks.map((link, idx) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-bold text-lg py-4 px-6 rounded-2xl transform transition-all duration-300 active:scale-95 animate-fade-in-up text-center ${location.pathname === link.path
-                    ? 'bg-white text-primary shadow-2xl'
-                    : 'text-white bg-white/10 active:bg-white/20 backdrop-blur-sm'
-                    }`}
+                  className={`
+                    font-bold text-base py-4 px-6 rounded-2xl 
+                    transform transition-all duration-300 active:scale-95 
+                    animate-fade-in-up text-center shadow-md
+                    ${location.pathname === link.path
+                      ? 'bg-gradient-to-r from-primary via-emerald-500 to-primary text-white shadow-lg shadow-primary/30'
+                      : 'bg-gray-50 text-gray-800 hover:bg-gray-100 border border-gray-200'
+                    }
+                  `}
                   style={{ animationDelay: `${idx * 75}ms` }}
                 >
                   {link.name}
                 </Link>
               ))}
 
-              {/* Sección de contacto más elegante para móvil */}
-              <div className="flex flex-col gap-3 mt-4 pt-5 border-t border-white/20">
-                {/* Botón de Llamada CTA */}
+              {/* Sección de contacto mejorada para móvil */}
+              <div className="flex flex-col gap-3 mt-4 pt-5 border-t border-gray-200">
+                {/* Botón de Llamada CTA - Verde destacado */}
                 <a
                   href="tel:+5493413623232"
-                  className="flex items-center justify-center gap-3 bg-white text-primary font-bold text-lg py-4 px-6 rounded-2xl shadow-xl active:scale-95 transition-transform duration-200"
+                  className="flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-emerald-600 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-xl shadow-primary/30 active:scale-95 transition-transform duration-200 border-2 border-white/50"
                 >
-                  <Phone className="w-5 h-5" />
+                  <div className="bg-white/20 p-2 rounded-full">
+                    <Phone className="w-5 h-5" strokeWidth={2.5} />
+                  </div>
                   <span>341 362-3232</span>
                 </a>
 
-                {/* Email con tamaño ajustado */}
+                {/* Email con mejor contraste */}
                 <a
                   href="mailto:Mauricioandresbay123@hotmail.com"
-                  className="flex items-center justify-center gap-3 bg-white/10 text-white font-medium text-sm py-3 px-4 rounded-xl backdrop-blur-sm active:bg-white/20 transition-all duration-200"
+                  className="flex items-center justify-center gap-3 bg-gray-100 text-gray-800 font-semibold text-sm py-3.5 px-4 rounded-xl border border-gray-300 active:bg-gray-200 transition-all duration-200 shadow-sm"
                 >
-                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <Mail className="w-4 h-4 flex-shrink-0 text-primary" strokeWidth={2.5} />
                   <span className="truncate">Mauricioandresbay123@hotmail.com</span>
                 </a>
+
+                {/* Horario */}
+                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-50 to-amber-50 text-gray-800 font-semibold text-sm py-3 px-4 rounded-xl border border-yellow-200">
+                  <Clock className="w-4 h-4 flex-shrink-0 text-yellow-600" strokeWidth={2.5} />
+                  <span>Atención las 24hs</span>
+                </div>
               </div>
             </div>
           </div>

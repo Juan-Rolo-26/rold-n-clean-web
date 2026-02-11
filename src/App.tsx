@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ChatBot from './components/ChatBot';
 import Hero from './components/Hero';
-import BestPrice from './components/BestPrice';
 import Services from './components/Services';
 import Environment from './components/Environment';
 import Stats from './components/Stats';
@@ -18,7 +17,6 @@ import About from './components/About';
 // Page Components with Advanced Entry Animations
 const HomePage = () => (
   <main className="main-offset animate-slide-up-fade">
-    <BestPrice />
     <Hero />
     <Stats />
     <WhyChooseUs />

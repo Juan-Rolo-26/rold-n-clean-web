@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import BestPrice from '@/components/BestPrice';
 import Services from '@/components/Services';
 import Environment from '@/components/Environment';
 import Stats from '@/components/Stats';
@@ -18,7 +17,6 @@ const Index = () => {
       <Header />
       <main className="main-offset">
         <Hero />
-        <BestPrice />
         <Services />
         <Environment />
         <Stats />
