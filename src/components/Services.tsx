@@ -92,7 +92,7 @@ const Services = () => {
   return (
     <div className="flex flex-col gap-0">
       {/* --- SECTION 1: General Services --- */}
-      <section id="servicios" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden">
+      <section id="servicios" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50/95 sm:bg-slate-50 relative overflow-hidden">
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="text-tertiary font-bold uppercase tracking-widest text-xs sm:text-sm mb-2 block">Nuestra Oferta</span>
@@ -144,7 +144,7 @@ const Services = () => {
       </section>
 
       {/* --- SECTION 2: Container Sizes --- */}
-      <section id="tamanos" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-slate-100">
+      <section id="tamanos" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-white/95 sm:bg-white relative overflow-hidden border-t border-slate-100">
         <div className="container-custom px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
             <span className="text-tertiary font-bold uppercase tracking-widest text-xs sm:text-sm block mb-2">Capacidades</span>
@@ -215,7 +215,7 @@ const Services = () => {
       </section>
 
       {/* --- SECTION 3: Earth Types --- */}
-      <section id="tierras" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden border-t border-slate-100">
+      <section id="tierras" data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-slate-50/95 sm:bg-slate-50 relative overflow-hidden border-t border-slate-100">
         <div className="container-custom px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div data-reveal="fade-right" className="relative rounded-3xl overflow-hidden shadow-2xl h-[300px] sm:h-[400px]">

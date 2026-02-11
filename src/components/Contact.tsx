@@ -97,7 +97,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" data-reveal="fade-up" className="section-padding bg-muted">
+    <section id="contacto" data-reveal="fade-up" className="section-padding bg-muted/90 sm:bg-muted">
       <div className="container-custom">
         {/* Section Header */}
         <div data-reveal="fade-up" className="text-center max-w-3xl mx-auto mb-16">

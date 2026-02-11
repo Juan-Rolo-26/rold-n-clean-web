@@ -53,7 +53,7 @@ const benefits = [
 
 const WhyChooseUs = () => {
   return (
-    <section data-reveal="fade-up" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+    <section data-reveal="fade-up" className="py-16 md:py-24 bg-slate-50/95 sm:bg-slate-50 relative overflow-hidden">
       {/* Premium Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
 

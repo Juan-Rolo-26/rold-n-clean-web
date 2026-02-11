@@ -78,7 +78,7 @@ const Stats = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} data-reveal="fade-up" className="py-16 md:py-24 bg-white relative overflow-hidden">
+        <section ref={sectionRef} data-reveal="fade-up" className="py-16 md:py-24 bg-white/95 sm:bg-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#4d7c0f_1px,transparent_1px)] [background-size:24px_24px]"></div>
 

@@ -26,7 +26,7 @@ const values = [
 
 const About = () => {
   return (
-    <section id="nosotros" data-reveal="fade-up" className="section-padding bg-background">
+    <section id="nosotros" data-reveal="fade-up" className="section-padding bg-background/95 sm:bg-background">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Side */}

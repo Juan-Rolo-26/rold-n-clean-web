@@ -129,6 +129,12 @@
     overflow-y: auto;
   }
 
+  @media (max-width: 768px) {
+    body {
+      background: radial-gradient(120% 140% at 8% 0%, #f2fff1 0%, #f7f3ea 48%, #f1f7ff 100%);
+    }
+  }
+
   /* Global Scale Up for Accessibility/Preference - INCREASED 25% */
   html {
     font-size: 20px;

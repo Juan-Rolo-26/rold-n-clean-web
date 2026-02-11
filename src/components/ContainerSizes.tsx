@@ -38,7 +38,7 @@ const sizes = [
 
 const ContainerSizes = () => {
     return (
-        <section data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden" id="tamanos">
+        <section data-reveal="fade-up" className="py-16 md:py-24 lg:py-32 bg-white/95 sm:bg-white relative overflow-hidden" id="tamanos">
 
             <div className="container-custom px-4 sm:px-6">
                 <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
