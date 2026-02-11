@@ -30,6 +30,13 @@ export function errorHandler(err, req, res, next) {
         });
     }
 
+    // Error de CORS
+    if (err.message.startsWith('CORS no permitido')) {
+        return res.status(403).json({
+            error: err.message
+        });
+    }
+
     // Error de red/timeout
     if (err.code === 'ECONNREFUSED' || err.code === 'ETIMEDOUT') {
         return res.status(503).json({

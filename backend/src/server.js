@@ -9,9 +9,29 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const allowedOrigins = (process.env.FRONTEND_URL || '')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean);
+
+const defaultDevOrigins = ['http://localhost:8080', 'http://localhost:5173'];
+const effectiveOrigins = allowedOrigins.length > 0
+    ? allowedOrigins
+    : defaultDevOrigins;
+
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (effectiveOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error(`CORS no permitido para el origen: ${origin}`));
+    },
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));

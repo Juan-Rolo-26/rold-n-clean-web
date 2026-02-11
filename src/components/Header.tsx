@@ -168,7 +168,7 @@ const Header = () => {
 
         {/* Mobile Menu - COMPLETAMENTE REDISEÑADO para máxima visibilidad */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t-4 border-primary animate-slide-down shadow-2xl">
+          <div className="md:hidden bg-white text-slate-900 border-t-4 border-primary animate-slide-down shadow-2xl">
             <div className="container-custom py-6 px-4 flex flex-col gap-3">
               {navLinks.map((link, idx) => (
                 <Link
@@ -179,8 +179,8 @@ const Header = () => {
                     transform transition-all duration-300 active:scale-95 
                     animate-fade-in-up text-center shadow-md
                     ${location.pathname === link.path
-                      ? 'bg-gradient-to-r from-primary via-emerald-500 to-primary text-white shadow-lg shadow-primary/30'
-                      : 'bg-gray-50 text-gray-800 hover:bg-gray-100 border border-gray-200'
+                      ? 'bg-gradient-to-r from-primary via-emerald-500 to-primary text-white shadow-lg shadow-primary/30 border border-primary/40'
+                      : 'bg-white text-slate-900 hover:bg-primary hover:text-white border border-slate-200'
                     }
                   `}
                   style={{ animationDelay: `${idx * 75}ms` }}

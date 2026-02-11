@@ -10,7 +10,20 @@ interface Message {
     timestamp: Date;
 }
 
+interface ChatApiResponse {
+    response?: string;
+    error?: string;
+}
+
 const ChatBot = () => {
+    const API_BASE_URL = import.meta.env.VITE_API_URL
+        || (import.meta.env.DEV ? 'http://localhost:3001' : '');
+    const normalizedBaseUrl = API_BASE_URL.endsWith('/')
+        ? API_BASE_URL.slice(0, -1)
+        : API_BASE_URL;
+    const chatEndpoint = normalizedBaseUrl.endsWith('/api')
+        ? `${normalizedBaseUrl}/chat`
+        : `${normalizedBaseUrl}/api/chat`;
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
@@ -46,66 +59,98 @@ const ChatBot = () => {
         { id: 4, text: '📞 Contacto', emoji: '📞' },
     ];
 
-    const handleSendMessage = (text: string) => {
-        if (!text.trim()) return;
+    const buildConversationHistory = (history: Message[]) =>
+        history
+            .slice(-6)
+            .map((msg) => ({
+                role: msg.sender === 'user' ? 'user' : 'assistant',
+                content: msg.text,
+            }));
+
+    const handleSendMessage = async (text: string) => {
+        const trimmed = text.trim();
+        if (!trimmed) return;
 
         const userMessage: Message = {
             id: Date.now().toString(),
-            text: text.trim(),
+            text: trimmed,
             sender: 'user',
             timestamp: new Date(),
         };
+
+        const conversationHistory = buildConversationHistory(messages);
 
         setMessages((prev) => [...prev, userMessage]);
         setInputValue('');
         setIsTyping(true);
 
-        // Simular respuesta del bot (aquí irá la IA después)
-        setTimeout(() => {
-            const botResponse = getBotResponse(text);
+        let timeout: number | undefined;
+
+        try {
+            const controller = new AbortController();
+            timeout = window.setTimeout(() => controller.abort(), 30000);
+
+            const response = await fetch(chatEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                signal: controller.signal,
+                body: JSON.stringify({
+                    message: trimmed,
+                    conversationHistory,
+                }),
+            });
+
+            const data: ChatApiResponse = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data.error || 'No se pudo procesar tu consulta en este momento.');
+            }
+
+            const botText = data.response?.trim();
+
             const botMessage: Message = {
                 id: (Date.now() + 1).toString(),
-                text: botResponse,
+                text: botText && botText.length > 0
+                    ? botText
+                    : 'No pude generar una respuesta válida. ¿Querés intentar de nuevo?',
                 sender: 'bot',
                 timestamp: new Date(),
             };
+
             setMessages((prev) => [...prev, botMessage]);
+        } catch (error) {
+            if (error instanceof DOMException && error.name === 'AbortError') {
+                const botMessage: Message = {
+                    id: (Date.now() + 1).toString(),
+                    text: 'La IA está tardando más de lo normal. ¿Querés intentar de nuevo?',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                };
+
+                setMessages((prev) => [...prev, botMessage]);
+                return;
+            }
+
+            const fallbackText = error instanceof Error
+                ? error.message
+                : 'No pude responder en este momento. ¿Querés intentar más tarde?';
+
+            const botMessage: Message = {
+                id: (Date.now() + 1).toString(),
+                text: fallbackText,
+                sender: 'bot',
+                timestamp: new Date(),
+            };
+
+            setMessages((prev) => [...prev, botMessage]);
+        } finally {
+            if (timeout) {
+                window.clearTimeout(timeout);
+            }
             setIsTyping(false);
-        }, 1000 + Math.random() * 1000);
-    };
-
-    const getBotResponse = (userText: string): string => {
-        const lowerText = userText.toLowerCase();
-
-        if (lowerText.includes('tamaño') || lowerText.includes('volquete') || lowerText.includes('medida')) {
-            return '¡Perfecto! Tenemos volquetes de diferentes tamaños:\n\n📦 1.5m³ - Chico (ideal para limpiezas pequeñas)\n📦 3m³ - Mediano (obras medianas)\n📦 6m³ - Grande (el más elegido)\n📦 7m³ - Con barandas (máxima capacidad)\n\n¿Te gustaría más información sobre alguno en particular?';
         }
-
-        if (lowerText.includes('precio') || lowerText.includes('costo') || lowerText.includes('tarifa')) {
-            return '💰 Para brindarte un presupuesto exacto, necesito algunos datos:\n\n• ¿Qué tamaño de volquete necesitás?\n• ¿Por cuántos días?\n• ¿En qué zona?\n\n¿Te gustaría que te contacte un asesor por WhatsApp para darte un precio personalizado?';
-        }
-
-        if (lowerText.includes('tierra') || lowerText.includes('jardin') || lowerText.includes('relleno')) {
-            return '🌱 Vendemos tierra de primera calidad:\n\n• Tierra Negra Zarandeada (ideal para jardinería fina)\n• Tierra Negra Común (para relleno y nivelación)\n• Tierra Colorada (bases compactas)\n\nEntrega en volquetes o a granel. ¿Qué cantidad necesitás?';
-        }
-
-        if (lowerText.includes('contacto') || lowerText.includes('telefono') || lowerText.includes('whatsapp')) {
-            return '📞 ¡Estamos para ayudarte!\n\n📱 WhatsApp: +54 9 341 362-3232\n📧 Email: info@volquetesroldan.com\n📍 Rosario, Santa Fe\n\n¿Querés que te conecte directamente con WhatsApp?';
-        }
-
-        if (lowerText.includes('horario') || lowerText.includes('hora') || lowerText.includes('cuando')) {
-            return '🕐 Nuestros horarios:\n\nLunes a Viernes: 8:00 - 18:00\nSábados: 8:00 - 13:00\n\n¡Entrega y retiro en el día! ¿En qué más puedo ayudarte?';
-        }
-
-        if (lowerText.includes('gracias') || lowerText.includes('thank')) {
-            return '¡De nada! 😊 Estoy aquí para lo que necesites. ¿Hay algo más en lo que pueda ayudarte?';
-        }
-
-        if (lowerText.includes('hola') || lowerText.includes('buenos') || lowerText.includes('buenas')) {
-            return '¡Hola! 👋 ¿En qué puedo ayudarte hoy? Puedo informarte sobre:\n\n📦 Tamaños de volquetes\n💰 Precios\n🌱 Venta de tierra\n📞 Contacto\n\n¿Qué te interesa saber?';
-        }
-
-        return '🤔 Entiendo tu consulta. Para darte la mejor respuesta, ¿podrías darme más detalles? También puedo conectarte con un asesor por WhatsApp para una atención personalizada. ¿Te gustaría?';
     };
 
     const handleQuickReply = (text: string) => {
