@@ -72,7 +72,7 @@ const Hero = () => {
         <div className="max-w-6xl w-full space-y-6 sm:space-y-8 md:space-y-10 flex flex-col items-center">
 
           {/* Badge - #1 en Roldán (Active BestPrice Design) */}
-          <div className="flex justify-center" data-reveal="zoom-in">
+          <div className="flex justify-center animate-scale-in">
             <div className="relative group">
               <div className="absolute inset-0 bg-yellow-400 rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
               <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-yellow-400 to-amber-500 px-5 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-2xl border-2 border-yellow-300/50">
@@ -87,7 +87,7 @@ const Hero = () => {
 
           {/* Main Title - BestPrice Design */}
           <div className="text-center">
-            <div className="inline-block mb-2 sm:mb-4" data-reveal="slide-right">
+            <div className="inline-block mb-2 sm:mb-4 animate-fade-in-left">
               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-2 sm:mb-4 leading-none">
                 <span className="block relative">
                   <span className="absolute inset-0 text-yellow-400 blur-lg opacity-50">
@@ -101,7 +101,7 @@ const Hero = () => {
             </div>
 
             {/* Stars */}
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4 py-2" data-reveal="zoom-in">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4 py-2 animate-scale-in delay-100">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
@@ -115,7 +115,7 @@ const Hero = () => {
               ))}
             </div>
 
-            <div className="inline-block" data-reveal="slide-left">
+            <div className="inline-block animate-fade-in-right delay-200">
               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none py-2">
                 <span className="block relative">
                   <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 bg-clip-text text-transparent blur-sm">
@@ -128,7 +128,7 @@ const Hero = () => {
               </h1>
             </div>
 
-            <div className="mt-4 sm:mt-6" data-reveal="fade-up">
+            <div className="mt-4 sm:mt-6 animate-fade-in-up delay-300">
               <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-white/95 tracking-wide drop-shadow-lg">
                 DEL MERCADO
               </p>
@@ -136,7 +136,7 @@ const Hero = () => {
           </div>
 
           {/* Subtitle Box */}
-          <div className="text-center w-full max-w-3xl mx-auto" data-reveal="fade-up">
+          <div className="text-center w-full max-w-3xl mx-auto animate-fade-in-up delay-300">
             <div className="inline-block bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl px-6 sm:px-10 py-4 sm:py-6 border border-white/20 shadow-2xl w-full">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2">
                 PRECIO JUSTO, SERVICIO IMPECABLE
@@ -150,7 +150,7 @@ const Hero = () => {
           {/* Benefit Cards - Optimized for Mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-5xl px-2">
 
-            <div className="group relative" data-reveal="slide-up">
+            <div className="group relative animate-fade-in-up delay-500">
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
               <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
                 <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
@@ -165,7 +165,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="group relative" data-reveal="slide-up" style={{ animationDelay: '0.1s' }}>
+            <div className="group relative animate-fade-in-up delay-700">
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
               <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
                 <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
@@ -180,7 +180,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="group relative" data-reveal="slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="group relative animate-fade-in-up delay-1000">
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
               <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
                 <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
@@ -198,7 +198,7 @@ const Hero = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="w-full flex justify-center pt-4 sm:pt-6" data-reveal="fade-up">
+          <div className="w-full flex justify-center pt-4 sm:pt-6 animate-scale-in delay-500">
             <a href="tel:+5493413623232" className="w-full sm:w-auto transform hover:scale-105 transition-transform duration-300">
               <Button className="w-full sm:w-auto h-16 sm:h-20 px-8 sm:px-12 text-lg sm:text-2xl rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-yellow-950 font-black tracking-wide shadow-[0_0_40px_rgba(251,191,36,0.4)] border-4 border-yellow-300/50 hover:border-yellow-200">
                 <Phone className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 animate-bounce" strokeWidth={3} />

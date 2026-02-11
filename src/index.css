@@ -152,6 +152,7 @@
     font-size: 20px;
     /* Increased base size to 20px (25% larger than 16px) */
   }
+
   @media (max-width: 768px) {
     html {
       font-size: 16px;
@@ -578,10 +579,11 @@
 
   @media (max-width: 768px) {
     [data-reveal] {
-      opacity: 1;
-      transform: none;
-      filter: none;
-      transition: none;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+      animation: none !important;
     }
   }
 }
