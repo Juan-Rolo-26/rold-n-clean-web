@@ -131,7 +131,19 @@
 
   @media (max-width: 768px) {
     body {
-      background: radial-gradient(120% 140% at 8% 0%, #f2fff1 0%, #f7f3ea 48%, #f1f7ff 100%);
+      background: radial-gradient(130% 140% at 6% -10%, #dcfce7 0%, #fff7ed 40%, #e0f2fe 100%);
+    }
+
+    main {
+      background: transparent;
+    }
+
+    section[class*="bg-white"],
+    section[class*="bg-slate-50"],
+    section[class*="bg-muted"],
+    section[class*="bg-background"] {
+      background-color: rgba(255, 255, 255, 0.82) !important;
+      backdrop-filter: blur(6px);
     }
   }
 
