@@ -5,7 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const base = env.VITE_BASE || "/";
+  const base =
+    env.VITE_BASE || (mode === "production" ? "/rold-n-clean-web/" : "/");
   return {
     base,
     server: {
