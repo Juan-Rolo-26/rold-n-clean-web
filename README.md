@@ -1,73 +1,113 @@
-# Welcome to your Lovable project
+# Rold-n-Clean Web (Frontend + Backend)
 
-## Project info
+## Requisitos
+- Node.js 18+
+- npm
+- (Backend) MySQL + Ollama
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Instalacion local
+```bash
+# Frontend
+npm install
+cp .env.example .env
+npm run dev
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Backend
+cd backend
+npm install
+cp .env.example .env
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Variables de entorno
+### Frontend (Vite)
+Archivo: `.env` o `.env.production`
+```
+VITE_API_URL=https://api.tudominio.com
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Backend
+Archivo: `backend/.env`
+```
+NODE_ENV=production
+PORT=3001
+FRONTEND_URL=https://tudominio.com
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=volquetes_user
+DB_PASSWORD=changeme
+DB_NAME=volquetes_roldan
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=llama3:8b
+OLLAMA_MAX_TOKENS=500
+OLLAMA_TEMPERATURE=0.3
+```
 
-**Use GitHub Codespaces**
+## Build del Frontend
+```bash
+npm run build
+```
+Salida: `dist/`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deploy Front (Ferozo / cPanel)
+1. Ejecutar `npm run build`.
+2. Subir TODO el contenido de `dist/` por FTP a `/public_html`.
+3. Verificar que `public_html/index.html` existe.
+4. El `.htaccess` ya se copia desde `public/.htaccess`.
 
-## What technologies are used for this project?
+## Deploy Back (VPS) con PM2 + Nginx + SSL
+### 1) Preparar VPS
+```bash
+sudo apt update
+sudo apt install -y nginx
+# Instalar Node.js (usar tu metodo preferido)
+```
 
-This project is built with:
+### 2) Subir proyecto y configurar backend
+```bash
+sudo mkdir -p /var/www/myapp
+sudo chown -R ubuntu:ubuntu /var/www/myapp
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Clonar repo en /var/www/myapp
+cd /var/www/myapp
+# git clone <repo>
 
-## How can I deploy this project?
+cd /var/www/myapp/backend
+npm install
+cp .env.example .env
+nano .env
+```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### 3) PM2
+```bash
+sudo npm i -g pm2
+cd /var/www/myapp/backend
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup
+```
 
-## Can I connect a custom domain to my Lovable project?
+### 4) Nginx (reverse proxy)
+```bash
+sudo cp /var/www/myapp/docs/nginx-api.tudominio.com.conf /etc/nginx/sites-available/api.tudominio.com
+sudo ln -s /etc/nginx/sites-available/api.tudominio.com /etc/nginx/sites-enabled/api.tudominio.com
+sudo nginx -t
+sudo systemctl reload nginx
+```
 
-Yes, you can!
+### 5) SSL (Let’s Encrypt)
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d api.tudominio.com
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### 6) Health check
+```bash
+curl https://api.tudominio.com/health
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Troubleshooting
+- CORS: revisar `FRONTEND_URL` en `backend/.env` (usar coma para multiples orígenes).
+- 404 en rutas SPA: confirmar que `public_html/.htaccess` existe (se copia desde `public/.htaccess`).
+- API URL mal: revisar `VITE_API_URL` y volver a ejecutar `npm run build`.
+- PM2 caido: `pm2 status` y `pm2 logs volquetes-roldan-api`.

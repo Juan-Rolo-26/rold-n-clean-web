@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Bot, User, HardHat, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ConstructorAvatar from '@/components/ConstructorAvatar';
+import { postApiJson } from '@/lib/api';
 
 interface Message {
     id: string;
@@ -16,14 +17,6 @@ interface ChatApiResponse {
 }
 
 const ChatBot = () => {
-    const API_BASE_URL = import.meta.env.VITE_API_URL
-        || (import.meta.env.DEV ? 'http://localhost:3001' : '');
-    const normalizedBaseUrl = API_BASE_URL.endsWith('/')
-        ? API_BASE_URL.slice(0, -1)
-        : API_BASE_URL;
-    const chatEndpoint = normalizedBaseUrl.endsWith('/api')
-        ? `${normalizedBaseUrl}/chat`
-        : `${normalizedBaseUrl}/api/chat`;
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
@@ -90,16 +83,11 @@ const ChatBot = () => {
             const controller = new AbortController();
             timeout = window.setTimeout(() => controller.abort(), 30000);
 
-            const response = await fetch(chatEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            const response = await postApiJson('/chat', {
+                message: trimmed,
+                conversationHistory,
+            }, {
                 signal: controller.signal,
-                body: JSON.stringify({
-                    message: trimmed,
-                    conversationHistory,
-                }),
             });
 
             const data: ChatApiResponse = await response.json().catch(() => ({}));
