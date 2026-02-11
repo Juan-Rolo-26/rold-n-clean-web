@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Phone, Star, TrendingDown, Zap, ShieldCheck, Award, Sparkles } from 'lucide-react';
+import { Phone, Star, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // Importing assets
@@ -47,7 +47,7 @@ const Hero = () => {
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${currentImageIndex === index ? "opacity-100" : "opacity-0"
+            className={`absolute inset-0 bg-center bg-no-repeat bg-[length:100%_100%] transition-opacity duration-1000 ease-in-out ${currentImageIndex === index ? "opacity-100" : "opacity-0"
               }`}
             style={{ backgroundImage: `url(${image})` }}
           />
@@ -133,68 +133,6 @@ const Hero = () => {
                 DEL MERCADO
               </p>
             </div>
-          </div>
-
-          {/* Subtitle Box */}
-          <div className="text-center w-full max-w-3xl mx-auto animate-fade-in-up delay-300">
-            <div className="inline-block bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl px-6 sm:px-10 py-4 sm:py-6 border border-white/20 shadow-2xl w-full">
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2">
-                PRECIO JUSTO, SERVICIO IMPECABLE
-              </p>
-              <p className="text-sm sm:text-base md:text-lg text-white/90 font-medium leading-relaxed">
-                Volquetes y tierra en Roldán al mejor precio. <br className="hidden sm:block" /> Atención rápida, sin sorpresas y con total confianza.
-              </p>
-            </div>
-          </div>
-
-          {/* Benefit Cards - Optimized for Mobile */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-5xl px-2">
-
-            <div className="group relative animate-fade-in-up delay-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
-              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
-                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
-                  <div className="bg-emerald-500/20 p-2.5 rounded-xl">
-                    <TrendingDown className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Sin Sorpresas</h3>
-                    <p className="text-emerald-100/80 text-xs sm:text-sm font-medium">Precio final garantizado</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="group relative animate-fade-in-up delay-700">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
-              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
-                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
-                  <div className="bg-yellow-500/20 p-2.5 rounded-xl">
-                    <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-300" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Rápido</h3>
-                    <p className="text-yellow-100/80 text-xs sm:text-sm font-medium">Entrega inmediata</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="group relative animate-fade-in-up delay-1000">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
-              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
-                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
-                  <div className="bg-blue-500/20 p-2.5 rounded-xl">
-                    <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Confianza</h3>
-                    <p className="text-blue-100/80 text-xs sm:text-sm font-medium">Servicio seguro</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
 
           {/* CTA Button */}
