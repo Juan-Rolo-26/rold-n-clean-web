@@ -37,11 +37,12 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="inicio" className="relative min-h-screen w-full bg-black">
+    <section id="inicio" className="relative min-h-screen w-full bg-emerald-900 overflow-hidden">
 
       {/* Background Slider */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 z-10" /> {/* Overlay mejorado */}
+        {/* Mobile-friendly fallback background in case images fail or load slowly */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-800 to-green-900 z-0" />
 
         {heroImages.map((image, index) => (
           <div
@@ -51,38 +52,43 @@ const Hero = () => {
             style={{ backgroundImage: `url(${image})` }}
           />
         ))}
+
+        {/* Green Overlay - Brand Identity */}
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/90 via-green-900/80 to-emerald-900/90 z-10 backdrop-blur-[2px]" />
       </div>
 
-      {/* Efectos decorativos flotantes */}
-      <div className="absolute inset-0 z-10 overflow-hidden opacity-20">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 z-10 overflow-hidden opacity-30 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-80 h-80 bg-yellow-400 rounded-full blur-[120px] animate-pulse"
           style={{ animationDuration: '4s' }} />
         <div className="absolute top-1/3 -left-32 w-96 h-96 bg-white rounded-full blur-[100px] animate-pulse"
           style={{ animationDuration: '6s', animationDelay: '1s' }} />
-        <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-green-400 rounded-full blur-[80px] animate-pulse"
+        <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-emerald-400 rounded-full blur-[80px] animate-pulse"
           style={{ animationDuration: '5s', animationDelay: '2s' }} />
       </div>
 
-      {/* Content - Fusión BestPrice + Hero */}
-      <div className="relative z-20 container-custom min-h-screen flex flex-col justify-center items-center py-16 sm:py-20 md:py-24 lg:py-28 text-center px-4 sm:px-6">
-        <div data-reveal="fade-up" className="max-w-6xl space-y-4 sm:space-y-5 md:space-y-7 lg:space-y-8 flex flex-col items-center w-full">
+      {/* Content */}
+      <div className="relative z-20 container-custom min-h-screen flex flex-col justify-center items-center py-20 sm:py-24 md:py-32 lg:py-36 text-center px-4 sm:px-6">
+        <div className="max-w-6xl w-full space-y-6 sm:space-y-8 md:space-y-10 flex flex-col items-center">
 
-          {/* Badge superior flotante */}
+          {/* Badge - #1 en Roldán (Active BestPrice Design) */}
           <div className="flex justify-center" data-reveal="zoom-in">
             <div className="relative group">
-              <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
-              <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-red-600 to-red-500 px-6 sm:px-10 py-2.5 sm:py-3 rounded-full shadow-2xl border-2 border-red-400/50">
-                <span className="font-black text-white text-sm sm:text-base md:text-lg tracking-wider uppercase">
-                  VOLQUETES ROLDAN
+              <div className="absolute inset-0 bg-yellow-400 rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
+              <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-yellow-400 to-amber-500 px-5 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-2xl border-2 border-yellow-300/50">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-900 animate-pulse" />
+                <span className="font-black text-yellow-900 text-xs sm:text-sm md:text-base tracking-wider uppercase">
+                  #1 en Roldán
                 </span>
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-900" />
               </div>
             </div>
           </div>
 
-          {/* Título principal - EL MEJOR PRECIO */}
+          {/* Main Title - BestPrice Design */}
           <div className="text-center">
-            <div className="inline-block mb-3 sm:mb-4" data-reveal="slide-right">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-3 sm:mb-4 leading-none">
+            <div className="inline-block mb-2 sm:mb-4" data-reveal="slide-right">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-2 sm:mb-4 leading-none">
                 <span className="block relative">
                   <span className="absolute inset-0 text-yellow-400 blur-lg opacity-50">
                     EL MEJOR
@@ -94,13 +100,12 @@ const Hero = () => {
               </h1>
             </div>
 
-            {/* Estrellas */}
-            <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4"
-              data-reveal="zoom-in">
+            {/* Stars */}
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4 py-2" data-reveal="zoom-in">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-12 lg:h-12 fill-yellow-300 text-yellow-300 animate-bounce"
+                  className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 fill-yellow-300 text-yellow-300 animate-bounce"
                   style={{
                     animationDelay: `${i * 0.15}s`,
                     animationDuration: '1.5s',
@@ -110,8 +115,8 @@ const Hero = () => {
               ))}
             </div>
 
-            <div className="inline-block mb-3 sm:mb-4" data-reveal="slide-left">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-none">
+            <div className="inline-block" data-reveal="slide-left">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-none py-2">
                 <span className="block relative">
                   <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 bg-clip-text text-transparent blur-sm">
                     PRECIO
@@ -123,92 +128,68 @@ const Hero = () => {
               </h1>
             </div>
 
-            <div data-reveal="fade-up">
-              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white/95 tracking-wide drop-shadow-2xl">
+            <div className="mt-4 sm:mt-6" data-reveal="fade-up">
+              <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-white/95 tracking-wide drop-shadow-lg">
                 DEL MERCADO
               </p>
             </div>
           </div>
 
-          {/* Subtítulo destacado */}
-          <div className="text-center" data-reveal="fade-up">
-            <div className="inline-block bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl px-6 sm:px-10 md:px-14 py-4 sm:py-5 md:py-6 border border-white/30 shadow-2xl">
+          {/* Subtitle Box */}
+          <div className="text-center w-full max-w-3xl mx-auto" data-reveal="fade-up">
+            <div className="inline-block bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl px-6 sm:px-10 py-4 sm:py-6 border border-white/20 shadow-2xl w-full">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2">
                 PRECIO JUSTO, SERVICIO IMPECABLE
               </p>
-              <p className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-2xl">
-                Precio claro en volquetes y tierra en Roldán, con atención rápida y sin sorpresas.
+              <p className="text-sm sm:text-base md:text-lg text-white/90 font-medium leading-relaxed">
+                Volquetes y tierra en Roldán al mejor precio. <br className="hidden sm:block" /> Atención rápida, sin sorpresas y con total confianza.
               </p>
             </div>
           </div>
 
-          {/* Beneficios en cards 3D - Compactos para móvil */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 max-w-5xl mx-auto w-full px-2">
+          {/* Benefit Cards - Optimized for Mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-5xl px-2">
 
-            {/* Card 1 */}
             <div className="group relative" data-reveal="slide-up">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-70 transition-all" />
-              <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-white/50">
-                <div className="flex flex-col items-center text-center gap-2.5 sm:gap-3 md:gap-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-green-500 rounded-full blur-md opacity-40" />
-                    <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-3 sm:p-3.5 md:p-4 rounded-2xl">
-                      <TrendingDown className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
-                    </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
+              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
+                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
+                  <div className="bg-emerald-500/20 p-2.5 rounded-xl">
+                    <TrendingDown className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-300" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h3 className="font-black text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 mb-1">
-                      Sin Cargos Ocultos
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 font-medium">
-                      Transparencia total
-                    </p>
+                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Sin Sorpresas</h3>
+                    <p className="text-emerald-100/80 text-xs sm:text-sm font-medium">Precio final garantizado</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Card 2 */}
             <div className="group relative" data-reveal="slide-up" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-70 transition-all" />
-              <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-white/50">
-                <div className="flex flex-col items-center text-center gap-2.5 sm:gap-3 md:gap-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-500 rounded-full blur-md opacity-40" />
-                    <div className="relative bg-gradient-to-br from-yellow-400 to-amber-600 p-3 sm:p-3.5 md:p-4 rounded-2xl">
-                      <Zap className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
-                    </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
+              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
+                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
+                  <div className="bg-yellow-500/20 p-2.5 rounded-xl">
+                    <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-300" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h3 className="font-black text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 mb-1">
-                      Atención Inmediata
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 font-medium">
-                      Respuesta al instante
-                    </p>
+                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Rápido</h3>
+                    <p className="text-yellow-100/80 text-xs sm:text-sm font-medium">Entrega inmediata</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Card 3 */}
-            <div className="group relative sm:col-span-2 lg:col-span-1" data-reveal="slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-70 transition-all" />
-              <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-white/50">
-                <div className="flex flex-col items-center text-center gap-2.5 sm:gap-3 md:gap-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-40" />
-                    <div className="relative bg-gradient-to-br from-blue-400 to-cyan-600 p-3 sm:p-3.5 md:p-4 rounded-2xl">
-                      <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
-                    </div>
+            <div className="group relative" data-reveal="slide-up" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all" />
+              <div className="relative bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 hover:border-white/40 transition-all hover:-translate-y-1">
+                <div className="flex flex-row sm:flex-col items-center gap-4 text-left sm:text-center">
+                  <div className="bg-blue-500/20 p-2.5 rounded-xl">
+                    <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h3 className="font-black text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 mb-1">
-                      Calidad Garantizada
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 font-medium">
-                      Servicio confiable
-                    </p>
+                    <h3 className="font-bold text-white text-base sm:text-lg mb-0.5">Confianza</h3>
+                    <p className="text-blue-100/80 text-xs sm:text-sm font-medium">Servicio seguro</p>
                   </div>
                 </div>
               </div>
@@ -216,19 +197,18 @@ const Hero = () => {
 
           </div>
 
-          {/* CTA Button - Más destacado */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-2 sm:pt-4 justify-center w-full max-w-md sm:max-w-none" data-reveal="fade-up">
-            <a href="tel:+5493413623232" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto h-14 sm:h-14 md:h-16 px-8 sm:px-10 md:px-12 text-base sm:text-lg md:text-xl rounded-full bg-gradient-to-r from-primary via-emerald-500 to-primary hover:from-primary/90 hover:via-emerald-600 hover:to-primary/90 text-white font-bold tracking-wide shadow-2xl shadow-primary/40 hover:-translate-y-1 active:scale-95 transition-all ring-4 ring-white/30">
-                <Phone className="w-5 h-5 sm:w-6 sm:h-6 mr-3" strokeWidth={2.5} />
-                Llamar y coordinar
+          {/* CTA Button */}
+          <div className="w-full flex justify-center pt-4 sm:pt-6" data-reveal="fade-up">
+            <a href="tel:+5493413623232" className="w-full sm:w-auto transform hover:scale-105 transition-transform duration-300">
+              <Button className="w-full sm:w-auto h-16 sm:h-20 px-8 sm:px-12 text-lg sm:text-2xl rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-yellow-950 font-black tracking-wide shadow-[0_0_40px_rgba(251,191,36,0.4)] border-4 border-yellow-300/50 hover:border-yellow-200">
+                <Phone className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 animate-bounce" strokeWidth={3} />
+                LLAMAR AHORA
               </Button>
             </a>
           </div>
 
         </div>
       </div>
-
     </section>
   );
 };
