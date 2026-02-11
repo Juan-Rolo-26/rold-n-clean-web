@@ -115,7 +115,7 @@ const ChatBot = () => {
     return (
         <>
             {/* Botón flotante - Responsive: más pequeño en móvil */}
-            <div className="fixed bottom-20 sm:bottom-6 left-4 sm:left-6 z-40">
+            <div className="fixed bottom-6 left-4 sm:left-6 z-40">
                 {!isOpen && (
                     <Button
                         onClick={() => setIsOpen(true)}

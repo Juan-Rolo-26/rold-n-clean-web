@@ -37,10 +37,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="inicio" className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section id="inicio" className="relative min-h-screen w-full bg-black">
 
       {/* Background Slider */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 z-10" /> {/* Overlay mejorado */}
 
         {heroImages.map((image, index) => (
