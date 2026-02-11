@@ -53,8 +53,8 @@ const Hero = () => {
           />
         ))}
 
-        {/* Green Overlay - Brand Identity */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/90 via-green-900/80 to-emerald-900/90 z-10 backdrop-blur-[2px]" />
+        {/* Neutral overlay for readability without tinting the image */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/35 z-10" />
       </div>
 
       {/* Decorative Elements */}

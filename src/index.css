@@ -585,5 +585,25 @@
       transition: none !important;
       animation: none !important;
     }
+
+    .animate-fade-in,
+    .animate-fade-in-up,
+    .animate-fade-in-down,
+    .animate-fade-in-left,
+    .animate-fade-in-right,
+    .animate-slide-up,
+    .animate-slide-up-fade,
+    .animate-slide-down,
+    .animate-scale-in,
+    .animate-scale-up,
+    .animate-reveal,
+    .animate-reveal-scale,
+    .animate-slide-in-right-smooth,
+    .animate-slide-in-left-smooth {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      animation: none !important;
+    }
   }
 }
