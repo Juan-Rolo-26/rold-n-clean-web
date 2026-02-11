@@ -94,7 +94,7 @@ const ScrollReveal = () => {
     if (!elements.length) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
+    if (prefersReduced || typeof IntersectionObserver === 'undefined') {
       elements.forEach((el) => el.classList.add('is-visible'));
       return;
     }
