@@ -115,6 +115,8 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body {
@@ -123,6 +125,8 @@
     background: linear-gradient(180deg, #ffffff 0%, #fbf7f7 50%, #ffffff 100%);
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   /* Global Scale Up for Accessibility/Preference - INCREASED 25% */

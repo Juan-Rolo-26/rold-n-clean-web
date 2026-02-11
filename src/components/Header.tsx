@@ -109,12 +109,13 @@ const Header = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-16">
 
-            {/* Mobile Logo - Mejorado con mejor contraste */}
+            {/* Mobile Logo - Super visible */}
             <Link to="/" className="md:hidden flex items-center gap-2 animate-fade-in-left">
               <img
                 src={logo}
                 alt="Volquetes Roldan"
-                className="h-10 object-contain drop-shadow-xl"
+                className="h-10 object-contain filter brightness-110 contrast-125"
+                style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 2px rgba(255,255,255,0.8))' }}
               />
             </Link>
 
@@ -154,13 +155,13 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Mobile Menu Button - Mejorado con mejor visibilidad */}
+            {/* Mobile Menu Button - MÁXIMA VISIBILIDAD */}
             <button
-              className="md:hidden p-2.5 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all duration-300 transform hover:scale-110 active:scale-95 border border-white/30 shadow-lg"
+              className="md:hidden p-3 bg-white/90 backdrop-blur-sm text-primary rounded-xl hover:bg-white transition-all duration-300 transform hover:scale-110 active:scale-95 border-2 border-white shadow-2xl"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
-              {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2.5} /> : <Menu className="w-7 h-7" strokeWidth={2.5} />}
+              {isMobileMenuOpen ? <X className="w-7 h-7 text-primary" strokeWidth={3} /> : <Menu className="w-7 h-7 text-primary" strokeWidth={3} />}
             </button>
           </div>
         </div>
