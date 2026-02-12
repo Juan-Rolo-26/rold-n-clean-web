@@ -5,23 +5,19 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const base =
-    env.VITE_BASE || (mode === "production" ? "/rold-n-clean-web/" : "/");
+
+
+  const base = mode === "production" ? "/Roldan/" : "/";
+
   return {
     base,
     server: {
       host: true,
       port: 8080,
-      // 👇 workaround TS-friendly para túneles
       allowedHosts: true,
-      hmr: {
-        overlay: false,
-      },
+      hmr: { overlay: false },
     },
-    plugins: [
-      react(),
-      mode === "development" && componentTagger(),
-    ].filter(Boolean),
+    plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
