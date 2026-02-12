@@ -147,15 +147,13 @@
     }
   }
 
-  /* Global Scale Up for Accessibility/Preference - INCREASED 25% */
   html {
-    font-size: 20px;
-    /* Increased base size to 20px (25% larger than 16px) */
+    font-size: 16px;
   }
 
-  @media (max-width: 768px) {
-    html {
-      font-size: 16px;
+  @media (min-width: 1024px) {
+    body {
+      zoom: 0.98;
     }
   }
 

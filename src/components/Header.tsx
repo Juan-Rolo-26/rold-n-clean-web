@@ -114,7 +114,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Volquetes Roldan"
-                className="h-10 object-contain filter brightness-110 contrast-125"
+                className="h-9 object-contain filter brightness-110 contrast-125"
                 style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 2px rgba(255,255,255,0.8))' }}
               />
             </Link>
@@ -157,7 +157,7 @@ const Header = () => {
 
             {/* Mobile Menu Button - MÁXIMA VISIBILIDAD */}
             <button
-              className="md:hidden p-3 bg-white/90 backdrop-blur-sm text-primary rounded-xl hover:bg-white transition-all duration-300 transform hover:scale-110 active:scale-95 border-2 border-white shadow-2xl"
+              className="md:hidden h-11 w-11 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 active:scale-95 border border-white/70 shadow-xl"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
@@ -168,16 +168,16 @@ const Header = () => {
 
         {/* Mobile Menu - COMPLETAMENTE REDISEÑADO para máxima visibilidad */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white text-slate-900 border-t-4 border-primary animate-slide-down shadow-2xl">
-            <div className="container-custom py-6 px-4 flex flex-col gap-3">
+          <div className="md:hidden bg-white/95 text-slate-900 border-t border-primary/30 animate-slide-down shadow-[0_20px_50px_-20px_rgba(15,23,42,0.45)] backdrop-blur-md">
+            <div className="container-custom py-5 px-4 flex flex-col gap-2">
               {navLinks.map((link, idx) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={`
-                    font-bold text-base py-4 px-6 rounded-2xl 
+                    font-semibold text-base py-3.5 px-5 rounded-2xl 
                     transform transition-all duration-300 active:scale-95 
-                    animate-fade-in-up text-center shadow-md
+                    animate-fade-in-up text-center shadow-sm
                     ${location.pathname === link.path
                       ? 'bg-gradient-to-r from-primary via-emerald-500 to-primary text-white shadow-lg shadow-primary/30 border border-primary/40'
                       : 'bg-white text-slate-900 hover:bg-primary hover:text-white border border-slate-200'
@@ -190,11 +190,11 @@ const Header = () => {
               ))}
 
               {/* Sección de contacto mejorada para móvil */}
-              <div className="flex flex-col gap-3 mt-4 pt-5 border-t border-gray-200">
+              <div className="flex flex-col gap-2.5 mt-3 pt-4 border-t border-gray-200">
                 {/* Botón de Llamada CTA - Verde destacado */}
                 <a
                   href="tel:+5493413623232"
-                  className="flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-emerald-600 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-xl shadow-primary/30 active:scale-95 transition-transform duration-200 border-2 border-white/50"
+                  className="flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-emerald-600 text-white font-bold text-base py-3.5 px-5 rounded-2xl shadow-lg shadow-primary/25 active:scale-95 transition-transform duration-200 border border-white/50"
                 >
                   <div className="bg-white/20 p-2 rounded-full">
                     <Phone className="w-5 h-5" strokeWidth={2.5} />
@@ -205,7 +205,7 @@ const Header = () => {
                 {/* Email con mejor contraste */}
                 <a
                   href="mailto:Mauricioandresbay123@hotmail.com"
-                  className="flex items-center justify-center gap-3 bg-gray-100 text-gray-800 font-semibold text-sm py-3.5 px-4 rounded-xl border border-gray-300 active:bg-gray-200 transition-all duration-200 shadow-sm"
+                  className="flex items-center justify-center gap-3 bg-gray-100 text-gray-800 font-semibold text-sm py-3 px-4 rounded-xl border border-gray-300 active:bg-gray-200 transition-all duration-200 shadow-sm"
                 >
                   <Mail className="w-4 h-4 flex-shrink-0 text-primary" strokeWidth={2.5} />
                   <span className="truncate">Mauricioandresbay123@hotmail.com</span>

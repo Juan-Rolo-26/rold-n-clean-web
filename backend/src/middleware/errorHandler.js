@@ -23,8 +23,17 @@ export function errorHandler(err, req, res, next) {
         });
     }
 
-    // Error de Ollama
-    if (err.message.includes('Ollama') || err.message.includes('IA') || err.message.includes('modelo')) {
+    // Error de IA (Ollama / OpenAI-compatible)
+    if (
+        err.message.includes('Ollama') ||
+        err.message.includes('IA') ||
+        err.message.includes('modelo') ||
+        err.message.includes('OPENAI') ||
+        err.message.includes('API key') ||
+        err.message.includes('Grok') ||
+        err.message.includes('Groq') ||
+        err.message.includes('xAI')
+    ) {
         return res.status(503).json({
             error: err.message || 'El servicio de IA no está disponible en este momento.'
         });

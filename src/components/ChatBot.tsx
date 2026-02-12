@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Bot, User, HardHat, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ConstructorAvatar from '@/components/ConstructorAvatar';
-import { postApiJson } from '@/lib/api';
+import { API_BASE_URL, postApiJson } from '@/lib/api';
 
 interface Message {
     id: string;
@@ -30,6 +30,18 @@ const ChatBot = () => {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const failureCountRef = useRef(0);
+    const lastFailureRef = useRef(0);
+
+    const whatsappUrl = 'https://wa.me/5493413623232';
+    const whatsappCta = [
+        'Para responderte más rápido, escribinos por WhatsApp:',
+        whatsappUrl
+    ].join('\n');
+    const whatsappIfNoQuickReplies = [
+        'Si no usás los botones rápidos, estas consultas las respondemos por WhatsApp:',
+        whatsappUrl
+    ].join('\n');
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -49,8 +61,68 @@ const ChatBot = () => {
         { id: 1, text: '📦 Tamaños de volquetes', emoji: '📦' },
         { id: 2, text: '💰 Consultar precio', emoji: '💰' },
         { id: 3, text: '🌱 Venta de tierra', emoji: '🌱' },
-        { id: 4, text: '📞 Contacto', emoji: '📞' },
+        { id: 4, text: '📍 Zonas de cobertura', emoji: '📍' },
+        { id: 5, text: '⏱️ Tiempos de entrega', emoji: '⏱️' },
+        { id: 6, text: '🧱 Residuos permitidos', emoji: '🧱' },
+        { id: 7, text: '📝 Cómo reservar', emoji: '📝' },
+        { id: 8, text: '📞 Contacto', emoji: '📞' },
     ];
+
+    const quickReplyFallbacks: Record<string, string> = {
+        '📦 Tamaños de volquetes': [
+            'Tenemos 4 tamaños:',
+            '• Volquete Chico 1.5m³',
+            '• Volquete Mediano 3m³',
+            '• Volquete Grande 6m³',
+            '• Volquete con Barandas 7m³',
+            '¿Querés que te asesore con el ideal para tu obra?'
+        ].join('\n'),
+        '💰 Consultar precio': [
+            'Los precios dependen del tamaño, la zona y la duración.',
+            'Para cotizar rápido, decime tamaño, dirección y fecha.',
+            'Si querés, te atiendo por WhatsApp:'
+        ].join('\n') + '\n' + whatsappUrl,
+        '🌱 Venta de tierra': [
+            'Vendemos:',
+            '• Tierra negra zarandeada',
+            '• Tierra negra común',
+            '• Tierra colorada',
+            '¿Querés que te asesore con el tipo ideal para tu obra?'
+        ].join('\n'),
+        '📍 Zonas de cobertura': [
+            'Cubrimos Roldán y zonas cercanas:',
+            '• Roldán',
+            '• Funes',
+            '• Pérez',
+            '• Rosario (Norte y Sur)',
+            '• Granadero Baigorria',
+            '• Capitán Bermúdez',
+            'Decime tu dirección y te confirmo.'
+        ].join('\n'),
+        '⏱️ Tiempos de entrega': [
+            'En Roldán solemos entregar en el día.',
+            'En otras zonas, 24 a 48 hs según disponibilidad.',
+            'Si querés, coordinamos por WhatsApp:'
+        ].join('\n') + '\n' + whatsappUrl,
+        '🧱 Residuos permitidos': [
+            'Aceptamos: escombros, tierra, cascotes, maderas y metales.',
+            'No aceptamos: residuos peligrosos, químicos, orgánicos ni líquidos.'
+        ].join('\n'),
+        '📝 Cómo reservar': [
+            'Para reservar necesitamos:',
+            '• Tamaño de volquete',
+            '• Dirección exacta',
+            '• Fecha y horario',
+            'Escribinos por WhatsApp y lo coordinamos rápido:'
+        ].join('\n') + '\n' + whatsappUrl,
+        '📞 Contacto': [
+            'Tel: +54 9 341 362-3232',
+            `WhatsApp: ${whatsappUrl}`,
+            'Email: MauricioandresBay123@hotmail.com'
+        ].join('\n'),
+    };
+
+    const isApiConfigured = Boolean(API_BASE_URL);
 
     const buildConversationHistory = (history: Message[]) =>
         history
@@ -60,9 +132,60 @@ const ChatBot = () => {
                 content: msg.text,
             }));
 
-    const handleSendMessage = async (text: string) => {
+    const registerFailure = (status?: number) => {
+        const now = Date.now();
+        if (now - lastFailureRef.current > 120000) {
+            failureCountRef.current = 0;
+        }
+        failureCountRef.current += 1;
+        lastFailureRef.current = now;
+
+        return failureCountRef.current >= 2 || status === 429 || status === 503 || status === 504;
+    };
+
+    const resetFailures = () => {
+        failureCountRef.current = 0;
+        lastFailureRef.current = 0;
+    };
+
+    const renderTextWithLinks = (text: string) => {
+        const parts = text.split(/(https?:\/\/[^\s]+)/g);
+
+        return parts.map((part, index) => {
+            if (part.startsWith('http://') || part.startsWith('https://')) {
+                return (
+                    <a
+                        key={`link-${index}`}
+                        href={part}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-primary hover:text-primary-dark"
+                    >
+                        {part}
+                    </a>
+                );
+            }
+
+            return <span key={`text-${index}`}>{part}</span>;
+        });
+    };
+
+    const appendBotMessage = (text: string) => {
+        const botMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            text,
+            sender: 'bot',
+            timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, botMessage]);
+    };
+
+    const handleSendMessage = async (
+        text: string,
+        options: { fallbackText?: string } = {}
+    ) => {
         const trimmed = text.trim();
-        if (!trimmed) return;
+        if (!trimmed || isTyping) return;
 
         const userMessage: Message = {
             id: Date.now().toString(),
@@ -75,74 +198,32 @@ const ChatBot = () => {
 
         setMessages((prev) => [...prev, userMessage]);
         setInputValue('');
-        setIsTyping(true);
 
-        let timeout: number | undefined;
-
-        try {
-            const controller = new AbortController();
-            timeout = window.setTimeout(() => controller.abort(), 30000);
-
-            const response = await postApiJson('/chat', {
-                message: trimmed,
-                conversationHistory,
-            }, {
-                signal: controller.signal,
-            });
-
-            const data: ChatApiResponse = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-                throw new Error(data.error || 'No se pudo procesar tu consulta en este momento.');
-            }
-
-            const botText = data.response?.trim();
-
-            const botMessage: Message = {
-                id: (Date.now() + 1).toString(),
-                text: botText && botText.length > 0
-                    ? botText
-                    : 'No pude generar una respuesta válida. ¿Querés intentar de nuevo?',
-                sender: 'bot',
-                timestamp: new Date(),
-            };
-
-            setMessages((prev) => [...prev, botMessage]);
-        } catch (error) {
-            if (error instanceof DOMException && error.name === 'AbortError') {
-                const botMessage: Message = {
-                    id: (Date.now() + 1).toString(),
-                    text: 'La IA está tardando más de lo normal. ¿Querés intentar de nuevo?',
-                    sender: 'bot',
-                    timestamp: new Date(),
-                };
-
-                setMessages((prev) => [...prev, botMessage]);
-                return;
-            }
-
-            const fallbackText = error instanceof Error
-                ? error.message
-                : 'No pude responder en este momento. ¿Querés intentar más tarde?';
-
-            const botMessage: Message = {
-                id: (Date.now() + 1).toString(),
-                text: fallbackText,
-                sender: 'bot',
-                timestamp: new Date(),
-            };
-
-            setMessages((prev) => [...prev, botMessage]);
-        } finally {
-            if (timeout) {
-                window.clearTimeout(timeout);
-            }
-            setIsTyping(false);
+        if (!isApiConfigured && import.meta.env.PROD) {
+            appendBotMessage(options.fallbackText || `La IA no está configurada todavía.\n${whatsappCta}`);
+            return;
         }
+
+        // Solo respuestas rápidas por defecto: cualquier consulta manual va a WhatsApp.
+        appendBotMessage(options.fallbackText || whatsappIfNoQuickReplies);
     };
 
     const handleQuickReply = (text: string) => {
-        handleSendMessage(text);
+        const trimmed = text.trim();
+        if (!trimmed || isTyping) return;
+
+        const userMessage: Message = {
+            id: Date.now().toString(),
+            text: trimmed,
+            sender: 'user',
+            timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, userMessage]);
+        setInputValue('');
+
+        const predefined = quickReplyFallbacks[text] || whatsappIfNoQuickReplies;
+        appendBotMessage(predefined);
     };
 
     return (
@@ -192,7 +273,7 @@ const ChatBot = () => {
 
             {/* Ventana del chat - Responsive: fullscreen en móvil, ventana en desktop */}
             {isOpen && (
-                <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-50 w-full h-full sm:w-[500px] md:w-[625px] sm:h-[700px] md:h-[850px] flex flex-col bg-white sm:rounded-3xl shadow-2xl border-0 sm:border-2 border-primary/20 overflow-hidden animate-scale-in">
+                <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-50 w-full h-full sm:w-[420px] md:w-[520px] sm:h-[620px] md:h-[720px] flex flex-col bg-white sm:rounded-3xl shadow-2xl border-0 sm:border-2 border-primary/20 overflow-hidden animate-scale-in">
                     {/* Header mejorado */}
                     <div className="relative bg-gradient-to-br from-primary via-primary-light to-tertiary p-6 text-white">
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXwid2lkdGg9IjEiLz48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvczJnPg==')] opacity-30" />
@@ -254,7 +335,9 @@ const ChatBot = () => {
                                         : 'bg-gradient-to-br from-primary via-primary-light to-tertiary text-white rounded-tr-none shadow-lg'
                                         }`}
                                 >
-                                    <p className="text-lg leading-relaxed whitespace-pre-line font-medium">{message.text}</p>
+                                    <p className="text-lg leading-relaxed whitespace-pre-line font-medium">
+                                        {renderTextWithLinks(message.text)}
+                                    </p>
                                     <span
                                         className={`text-sm mt-2 block font-medium ${message.sender === 'bot' ? 'text-slate-400' : 'text-white/80'
                                             }`}
@@ -288,22 +371,21 @@ const ChatBot = () => {
                     </div>
 
                     {/* Respuestas rápidas */}
-                    {messages.length === 1 && (
-                        <div className="px-4 py-2 bg-white border-t border-slate-100">
-                            <p className="text-xs text-slate-500 mb-2 font-medium">Respuestas rápidas:</p>
-                            <div className="flex flex-wrap gap-2">
-                                {quickReplies.map((reply) => (
-                                    <button
-                                        key={reply.id}
-                                        onClick={() => handleQuickReply(reply.text)}
-                                        className="text-xs px-3 py-2 bg-slate-100 hover:bg-primary hover:text-white rounded-full transition-all duration-200 font-medium border border-slate-200 hover:border-primary hover:shadow-md"
-                                    >
-                                        {reply.text}
-                                    </button>
-                                ))}
-                            </div>
+                    <div className="px-4 py-3 bg-white border-t border-slate-100">
+                        <p className="text-xs text-slate-500 mb-3 font-semibold uppercase tracking-wide">Respuestas rápidas</p>
+                        <div className="flex flex-wrap gap-2">
+                            {quickReplies.map((reply) => (
+                                <button
+                                    key={reply.id}
+                                    onClick={() => handleQuickReply(reply.text)}
+                                    disabled={isTyping}
+                                    className="text-sm px-4 py-2.5 bg-gradient-to-r from-white to-emerald-50 text-slate-800 rounded-full transition-all duration-200 font-semibold border border-emerald-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {reply.text}
+                                </button>
+                            ))}
                         </div>
-                    )}
+                    </div>
 
                     {/* Input */}
                     <div className="p-4 bg-white border-t border-slate-100">
@@ -324,7 +406,7 @@ const ChatBot = () => {
                             />
                             <Button
                                 type="submit"
-                                disabled={!inputValue.trim()}
+                                disabled={!inputValue.trim() || isTyping}
                                 className="bg-gradient-to-br from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white rounded-xl px-4 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Send className="w-5 h-5" />

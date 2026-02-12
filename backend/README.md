@@ -32,6 +32,32 @@ Configurar:
 - `DB_NAME`: `volquetes_roldan`
 - `OLLAMA_URL`: `http://localhost:11434`
 
+#### Opción Grok (xAI)
+
+Si querés usar **Grok** en lugar de Ollama:
+
+```env
+AI_PROVIDER=grok
+OPENAI_BASE_URL=https://api.x.ai/v1
+OPENAI_API_KEY=tu_api_key
+OPENAI_MODEL=grok-2-latest
+```
+
+Este backend debe correr en un servidor con Node (VPS, Render, Railway, etc.). No funciona en hosting compartido sin Node.
+
+#### Opción Groq
+
+Si querés usar **Groq**:
+
+```env
+AI_PROVIDER=groq
+GROQ_BASE_URL=https://api.groq.com/openai/v1
+GROQ_API_KEY=tu_api_key
+GROQ_MODEL=llama3-8b-8192
+```
+
+Podés cambiar `GROQ_MODEL` por cualquier modelo disponible en tu cuenta.
+
 ### 3. Instalar y Configurar MySQL
 
 ```bash

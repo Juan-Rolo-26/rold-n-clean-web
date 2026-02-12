@@ -8,6 +8,21 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const resolveProvider = () => {
+    const explicit = (process.env.AI_PROVIDER || '').toLowerCase();
+    if (explicit) return explicit;
+    if (process.env.GROQ_API_KEY) return 'groq';
+    if (process.env.OPENAI_API_KEY) return 'openai';
+    return 'ollama';
+};
+const AI_PROVIDER = resolveProvider();
+const OPENAI_PROVIDERS = new Set(['openai', 'grok', 'xai', 'ns', 'groq']);
+const isOpenAiProvider = OPENAI_PROVIDERS.has(AI_PROVIDER);
+const modelLabel = isOpenAiProvider
+    ? (AI_PROVIDER === 'groq'
+        ? (process.env.GROQ_MODEL || process.env.OPENAI_MODEL || 'llama3-8b-8192')
+        : (process.env.OPENAI_MODEL || process.env.GROQ_MODEL || 'grok-2-latest'))
+    : (process.env.OLLAMA_MODEL || 'llama3:8b');
 
 const allowedOrigins = (process.env.FRONTEND_URL || '')
     .split(',')
@@ -48,7 +63,8 @@ app.get('/health', (req, res) => {
         status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
-        model: process.env.OLLAMA_MODEL
+        provider: AI_PROVIDER,
+        model: modelLabel
     });
 });
 
@@ -56,8 +72,9 @@ app.get('/health', (req, res) => {
 app.get('/api/test', (req, res) => {
     res.json({
         message: '🤖 Backend IA Volquetes Roldán funcionando correctamente',
-        ollama_url: process.env.OLLAMA_URL,
-        model: process.env.OLLAMA_MODEL
+        provider: AI_PROVIDER,
+        model: modelLabel,
+        ollama_url: process.env.OLLAMA_URL
     });
 });
 
@@ -81,8 +98,11 @@ app.listen(PORT, () => {
     console.log('║   🤖 BACKEND IA VOLQUETES ROLDÁN                      ║');
     console.log('╠════════════════════════════════════════════════════════╣');
     console.log(`║   🚀 Servidor:     http://localhost:${PORT}              ║`);
-    console.log(`║   🧠 Ollama:       ${process.env.OLLAMA_URL}         ║`);
-    console.log(`║   📊 Modelo:       ${process.env.OLLAMA_MODEL || 'llama3:8b'}              ║`);
+    console.log(`║   🧠 Proveedor:    ${AI_PROVIDER}                           ║`);
+    console.log(`║   📊 Modelo:       ${modelLabel}              ║`);
+    if (!isOpenAiProvider) {
+        console.log(`║   🧠 Ollama:       ${process.env.OLLAMA_URL}         ║`);
+    }
     console.log(`║   🗄️  Base de Datos: ${process.env.DB_NAME || 'volquetes_roldan'}      ║`);
     console.log('╚════════════════════════════════════════════════════════╝');
 });

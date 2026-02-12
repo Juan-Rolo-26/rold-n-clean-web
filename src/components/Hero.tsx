@@ -37,7 +37,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="inicio" className="relative min-h-screen w-full bg-emerald-900 overflow-hidden">
+    <section id="inicio" className="relative min-h-[100svh] w-full bg-emerald-900 overflow-hidden">
 
       {/* Background Slider */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -47,7 +47,7 @@ const Hero = () => {
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-center bg-no-repeat bg-[length:100%_100%] transition-opacity duration-1000 ease-in-out ${currentImageIndex === index ? "opacity-100" : "opacity-0"
+            className={`absolute inset-0 bg-no-repeat bg-cover bg-center transition-opacity duration-1000 ease-in-out ${currentImageIndex === index ? "opacity-100" : "opacity-0"
               }`}
             style={{ backgroundImage: `url(${image})` }}
           />
@@ -68,8 +68,8 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container-custom min-h-screen flex flex-col justify-center items-center py-20 sm:py-24 md:py-32 lg:py-36 text-center px-4 sm:px-6">
-        <div className="max-w-6xl w-full space-y-6 sm:space-y-8 md:space-y-10 flex flex-col items-center">
+      <div className="relative z-20 container-custom min-h-[100svh] flex flex-col justify-center items-center py-16 sm:py-20 md:py-28 lg:py-32 text-center px-4 sm:px-6">
+        <div className="max-w-6xl w-full space-y-6 sm:space-y-8 md:space-y-10 flex flex-col items-center -mt-4 sm:-mt-6 md:-mt-10 lg:-mt-12">
 
           {/* Badge - #1 en Roldán (Active BestPrice Design) */}
           <div className="flex justify-center animate-scale-in">

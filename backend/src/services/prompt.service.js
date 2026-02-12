@@ -18,6 +18,35 @@ Asistente:`;
 }
 
 /**
+ * Construye mensajes compatibles con APIs tipo OpenAI (ej: Grok)
+ * @param {string} userMessage - Mensaje del usuario
+ * @param {Object} dbInfo - Información de la base de datos
+ * @param {Array} conversationHistory - Últimos mensajes de la conversación
+ * @returns {Array} - Mensajes estructurados
+ */
+export function buildChatMessages(userMessage, dbInfo, conversationHistory) {
+    const systemContext = buildSystemContext(dbInfo);
+
+    const messages = [
+        { role: 'system', content: systemContext },
+    ];
+
+    if (Array.isArray(conversationHistory)) {
+        conversationHistory.forEach((msg) => {
+            if (!msg?.role || !msg?.content) return;
+            messages.push({
+                role: msg.role,
+                content: msg.content,
+            });
+        });
+    }
+
+    messages.push({ role: 'user', content: userMessage });
+
+    return messages;
+}
+
+/**
  * Construye el contexto del sistema con información del negocio
  * @param {Object} dbInfo - Información de la base de datos
  * @returns {string} - Contexto del sistema

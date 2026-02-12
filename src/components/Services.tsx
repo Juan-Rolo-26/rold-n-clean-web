@@ -41,7 +41,8 @@ const sizes = [
     description: 'Ideal para pequeñas limpiezas y reformas menores.',
     dimensions: '2m x 1.5m',
     features: ['Escombros limpios', 'Tierra', 'Poda pequeña'],
-    recommended: false
+    recommended: false,
+    orderMobile: 4
   },
   {
     size: '3m³',
@@ -49,7 +50,8 @@ const sizes = [
     description: 'Perfecto para obras medianas, demoliciones parciales.',
     dimensions: '3m x 1.6m',
     features: ['Obra en general', 'Mezcla de residuos', 'Reformas'],
-    recommended: false
+    recommended: false,
+    orderMobile: 3
   },
   {
     size: '6m³',
@@ -57,7 +59,8 @@ const sizes = [
     description: 'Para grandes obras y volúmenes importantes.',
     dimensions: '3.4m x 1.75m',
     features: ['Grandes volúmenes', 'Construcción', 'Industria'],
-    recommended: true
+    recommended: true,
+    orderMobile: 2
   },
   {
     size: '7m³',
@@ -65,7 +68,8 @@ const sizes = [
     description: 'Máxima capacidad. Ideal para grandes generadores.',
     dimensions: '3.8m x 1.8m',
     features: ['Máxima capacidad', 'Barandas de seguridad', 'Grandes obras'],
-    recommended: false
+    recommended: false,
+    orderMobile: 1
   }
 ];
 
@@ -162,7 +166,7 @@ const Services = () => {
                 key={index}
                 data-reveal="fade-up"
                 data-reveal-delay={index * 90}
-                className={`relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border ${item.recommended
+                className={`relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border ${item.orderMobile === 1 ? 'order-1' : item.orderMobile === 2 ? 'order-2' : item.orderMobile === 3 ? 'order-3' : 'order-4'} sm:order-none ${item.recommended
                   ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-100 sm:scale-105 z-10 my-4 sm:my-0'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-tertiary/30 hover:shadow-xl hover:-translate-y-2'
                   }`}
