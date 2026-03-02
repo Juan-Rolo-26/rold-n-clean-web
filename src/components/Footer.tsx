@@ -71,7 +71,7 @@ const Footer = () => {
               <li className="flex items-start gap-3 sm:gap-4">
                 <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 flex-shrink-0" />
                 <span className="text-white/80 text-base sm:text-lg">
-                  Marcos Ateca 743<br />
+                  Marco Ateca 748<br />
                   Roldán, Santa Fe<br />
                   Argentina
                 </span>

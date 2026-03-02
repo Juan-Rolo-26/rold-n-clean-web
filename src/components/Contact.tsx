@@ -17,7 +17,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Dirección',
-    content: 'Marcos Ateca 743, Roldán, Santa Fe, Argentina',
+    content: 'Marco Ateca 748, Roldán, Santa Fe, Argentina',
   },
   {
     icon: Phone,
@@ -238,7 +238,7 @@ const Contact = () => {
             {/* Map */}
             <div className="bg-card rounded-2xl overflow-hidden shadow-soft h-80">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27016.11755392045!2d-60.93!3d-32.89!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b6539b81b07f8d%3A0x50c8e8c0fc0db3e7!2sRold%C3%A1n%2C%20Santa%20Fe%2C%20Argentina!5e0!3m2!1ses!2sar!4v1640000000000!5m2!1ses!2sar"
+                src="https://maps.google.com/maps?q=Marco%20Ateca%20748%20Rold%C3%A1n%20Santa%20Fe%20Argentina&z=16&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
